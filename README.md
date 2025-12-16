@@ -1,7 +1,5 @@
 # Blaseek Recruitment — Official Landing Page
 
-**URL:** https://rgmazon.pages.dev/
-
 ## 🚀 Overview
 
 Blaseek Recruitment is a professional recruitment services landing page designed to connect organizations with exceptional talent across industries. This site highlights Blaseek’s mission, services, process, industry expertise, and contact options.
@@ -52,7 +50,4 @@ The focus of the site is on presenting a clear, user-friendly experience for com
    - Contact form for inquiries
    - Email and phone fields for lead capture
 
-## 📌 How to Use This Repo
-
-1. **Clone the repository**
 
