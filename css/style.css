@@ -10,6 +10,7 @@
     --accent-blue: #0066cc;
 }
 
+
 /* ===========================
    Base Styles
    =========================== */
@@ -20,7 +21,7 @@
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     color: var(--dark-gray);
     overflow-x: hidden;
     line-height: 1.6;
@@ -732,14 +733,22 @@ select.form-control {
     margin-bottom: 3rem;
 }
 
+/* Footer background and readable link colors */
+.footer {
+    background: linear-gradient(180deg, var(--primary-blue) 0%, #00163f 100%);
+    color: white;
+    padding: 4rem 0 2rem;
+}
+
 .footer-section h4 {
     font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
+    color: white;
 }
 
 .footer-section p {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
 }
 
@@ -758,7 +767,7 @@ select.form-control {
 }
 
 .footer-section ul li a {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
     transition: color 0.3s ease;
 }
