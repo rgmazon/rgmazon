@@ -769,11 +769,18 @@ select.form-control {
 .footer-section ul li a {
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
-    transition: color 0.3s ease;
+    display: inline-block;
+    transition: color 0.2s ease, transform 0.15s ease;
 }
 
 .footer-section ul li a:hover {
-    color: white;
+    color: #e6f4ff;
+    transform: translateX(6px);
+}
+
+.footer-section ul li a:focus {
+    outline: 2px dashed rgba(230, 244, 255, 0.25);
+    outline-offset: 4px;
 }
 
 .footer-bottom {
