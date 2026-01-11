@@ -6,21 +6,26 @@ import { Projects } from "@/sections/Projects";
 import { Testimonials } from "@/sections/Testimonials";
 import { Contact } from "@/sections/Contact";
 import { Footer } from "@/layout/Footer";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 function App() {
 
-  return <div className="min-h-screen overflow-x-hidden">
-    <Navbar />
-    <main>
-      <Hero />
-      <About />
-      <Projects />
-      <Experience />
-      <Testimonials />
-      <Contact />
-    </main>
-    <Footer />  
-  </div>
+  return (
+    <ThemeProvider>
+      <div className="min-h-screen overflow-x-hidden">
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          <Projects />
+          <Experience />
+          <Testimonials />
+          <Contact />
+        </main>
+        <Footer />  
+      </div>
+    </ThemeProvider>
+  )
 }
 
 export default App

@@ -8,6 +8,7 @@ import {
   Facebook,
   Download,
 } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 
 const skills = [
     "JavaScript",
@@ -27,6 +28,7 @@ const skills = [
 ];  
 
 export const Hero = () => {
+    const { isDarkMode } = useTheme();
 
     return <section className="relative min-h-screen flex items-center overflow-hidden" id="hero">
 
@@ -138,7 +140,7 @@ export const Hero = () => {
                         />
                         <div className="relative glass rounded-3xl p-2 glow-border">
                             <img 
-                                src="/assets/profile-image.jpg" 
+                                src={isDarkMode ? "/assets/profile-image-dark.avif" : "/assets/profile-image-nekkid.avif"}
                                 alt="RG Mazon" 
                                 className="w-full aspect-[4/5] object-cover rounded-2xl" 
                             />

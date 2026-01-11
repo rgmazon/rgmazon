@@ -1,48 +1,91 @@
 import { ArrowUpRight, Github } from "lucide-react";
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
 
+// const projects = [
+//     {
+//         title: "FLIQUEY Social",
+//         description: "Description for project one.",
+//         image: "/assets/projects/fliquey.avif",
+//         tags: ["PHP", "MySQL", "JavaScript", "Bootstrap", "Smarty Template Engine", "Docker"],
+//         link: "https://social.fliquey.com/",
+//         github: "#"
+//     },
+//     {
+//         title: "Applemax Stream",
+//         description: "Description for project two.",
+//         image: "/assets/projects/applemax-stream.avif",
+//         tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Docker", "JavaScript"],
+//         link: "#",
+//         github: "#"
+//     },
+//     {
+//         title: "FLIQUEY Landing Page",
+//         description: "Description for project three.",
+//         image: "/assets/projects/fliquey-landing.avif",
+//         tags: ["Bootstrap", "PHP", "JavaScript"],
+//         link: "#",
+//         github: "#"
+//     },
+//     {
+//         title: "Professional Portfolio",
+//         description: "Description for project four.",
+//         image: "/assets/projects/professional-portfolio.avif",
+//         tags: ["React.js", "TailwindCSS", "JavaScript", "Cloudflare Pages", "EmailJS"],
+//         link: "https://rgmazon.pages.dev/",
+//         github: "#"
+//     },
+//     {
+//         title: "Consbeez Call Center Services Website",
+//         description: "Designed, developed, deployed, and maintained the official website of Consbeez, delivering a fast, responsive, and user-focused web experience.",
+//         image: "/assets/projects/consbeez.png",
+//         tags: ["Bootstrap", "JavaScript", "PHP", "PHPMailer"],
+//         link: "https://consbeez.com/",
+//         github: "#"
+//     }
+// ]
 const projects = [
-    {
-        title: "FLIQUEY Social",
-        description: "Description for project one.",
-        image: "/assets/projects/fliquey.avif",
-        tags: ["PHP", "MySQL", "JavaScript", "Bootstrap", "Smarty Template Engine", "Docker"],
-        link: "https://social.fliquey.com/",
-        github: "#"
-    },
-    {
-        title: "Applemax Stream",
-        description: "Description for project two.",
-        image: "/assets/projects/applemax-stream.avif",
-        tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Docker", "JavaScript"],
-        link: "#",
-        github: "#"
-    },
-    {
-        title: "FLIQUEY Landing Page",
-        description: "Description for project three.",
-        image: "/assets/projects/fliquey-landing.avif",
-        tags: ["Bootstrap", "PHP", "JavaScript"],
-        link: "#",
-        github: "#"
-    },
-    {
-        title: "Professional Portfolio",
-        description: "Description for project four.",
-        image: "/assets/projects/professional-portfolio.avif",
-        tags: ["React.js", "TailwindCSS", "JavaScript", "Cloudflare Pages", "EmailJS"],
-        link: "https://rgmazon.pages.dev/",
-        github: "#"
-    },
-    {
-        title: "Consbeez Call Center Services Website",
-        description: "Designed, developed, deployed, and maintained the official website of Consbeez, delivering a fast, responsive, and user-focused web experience.",
-        image: "/assets/projects/consbeez.png",
-        tags: ["Bootstrap", "JavaScript", "PHP", "PHPMailer"],
-        link: "https://consbeez.com/",
-        github: "#"
-    }
-]
+  {
+    title: "FLIQUEY Social",
+    description: "A full-featured social networking platform built with PHP and MySQL, featuring user profiles, real-time interactions, and a responsive UI. Utilizes the Smarty template engine for clean separation of logic and design, and Docker for streamlined development and deployment.",
+    image: "/assets/projects/fliquey.avif",
+    tags: ["PHP", "MySQL", "JavaScript", "Bootstrap", "Smarty Template Engine", "Docker"],
+    link: "https://social.fliquey.com/",
+    github: "#"
+  },
+  {
+    title: "Applemax Stream",
+    description: "A media streaming web application developed using Laravel and MySQL, designed for performance and scalability. Includes a modern, responsive interface built with Bootstrap and dynamic features powered by JavaScript, all containerized with Docker for efficient deployment.",
+    image: "/assets/projects/applemax-stream.avif",
+    tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Docker", "JavaScript"],
+    link: "#",
+    github: "#"
+  },
+  {
+    title: "FLIQUEY Landing Page",
+    description: "A conversion-focused landing page created to promote the FLIQUEY platform. Built with Bootstrap, PHP, and JavaScript to ensure fast loading, mobile responsiveness, and seamless user interaction.",
+    image: "/assets/projects/fliquey-landing.avif",
+    tags: ["Bootstrap", "PHP", "JavaScript"],
+    link: "#",
+    github: "#"
+  },
+  {
+    title: "Professional Portfolio",
+    description: "A modern personal portfolio website built with React and TailwindCSS, showcasing projects and skills with a clean, responsive design. Deployed on Cloudflare Pages and integrated with EmailJS for direct contact functionality.",
+    image: "/assets/projects/professional-portfolio.avif",
+    tags: ["React.js", "TailwindCSS", "JavaScript", "Cloudflare Pages", "EmailJS"],
+    link: "https://rgmazon.pages.dev/",
+    github: "#"
+  },
+  {
+    title: "Consbeez Call Center Services Website",
+    description: "Designed, developed, deployed, and maintained the official website of Consbeez, delivering a fast, responsive, and user-focused web experience. Built with PHP, Bootstrap, and JavaScript, with PHPMailer integration for reliable client inquiries and email handling.",
+    image: "/assets/projects/consbeez.png",
+    tags: ["Bootstrap", "JavaScript", "PHP", "PHPMailer"],
+    link: "https://consbeez.com/",
+    github: "#"
+  }
+];
+
 
 
 export const Projects = () => {
@@ -91,7 +134,7 @@ export const Projects = () => {
                 </div>
 
                 {/* Projects Grid */}
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.map((project, idx) => (
                         <div key={idx} 
                             className="group glass rounded-2xl overflow-hidden animate-fade-in md:row-span-1"
@@ -104,7 +147,6 @@ export const Projects = () => {
                                     alt={project.title} 
                                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent opacity-60" />
                                 {/* Overlay Links */}
                                 <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <a 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Button } from "@/components/Button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 
 const navLinks = [
     { href: "#about", label: "About" },
@@ -14,6 +14,7 @@ export const Navbar = () => {
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const { isDarkMode, toggleTheme } = useTheme();
 
     {/* Handle scroll to add background to navbar */}
     useEffect(() => {
@@ -43,11 +44,15 @@ export const Navbar = () => {
                 </div>
             </div>
 
-            {/* CTA Button */}
+            {/* Theme Toggle Button */}
             <div className="hidden md:block">
-                <a href="#contact">
-                    <Button size="sm">Contact Me</Button>
-                </a>
+                <button 
+                    onClick={toggleTheme}
+                    className="p-3 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
+                    aria-label="Toggle theme"
+                >
+                    {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                </button>
             </div>
 
             {/* Mobile Menu Button*/}
@@ -76,7 +81,16 @@ export const Navbar = () => {
                         ))
                     }
 
-                    <Button onClick={() => setIsMobileMenuOpen(false)}>Contact Me</Button>
+                    <button 
+                        onClick={() => {
+                            toggleTheme();
+                            setIsMobileMenuOpen(false);
+                        }}
+                        className="flex items-center gap-2 text-lg text-muted-foreground hover:text-foreground py-2"
+                    >
+                        {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                        {isDarkMode ? "Light Mode" : "Dark Mode"}
+                    </button>
 
                 </div>
             </div>
