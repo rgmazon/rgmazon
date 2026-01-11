@@ -62,7 +62,7 @@ export const Hero = () => {
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
 
 
-            {[...Array(30)].map((_, i) => (
+            {[...Array(50)].map((_, i) => (
                 <div 
                     className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
                     style={{
@@ -92,7 +92,7 @@ export const Hero = () => {
 
                     {/* Headline */}
                     <div className="space-y-4">
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in animation-delay-100">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in animation-delay-100">
                             Turning <span className="text-primary glow-text">ideas</span> 
                             <br />
                             into high-impact

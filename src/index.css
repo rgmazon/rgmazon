@@ -43,7 +43,7 @@
   --color-border: #b0b0c8;
 
   --color-highlight: #f5a623;
-  --color-surface: #e0e0ec;
+  --color-surface: #b8b8d0;
 }
 
 @layer base {
@@ -83,6 +83,12 @@
   :root.light footer {
     background-color: #b8b8d4;
     border-top-color: #9090b8;
+  }
+
+  :root.light input::placeholder,
+  :root.light textarea::placeholder {
+    color: #9090a8;
+    opacity: 1;
   }
 
 
