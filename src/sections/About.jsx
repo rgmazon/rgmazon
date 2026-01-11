@@ -4,7 +4,7 @@ const highlights = [
     {
         icon: Code2,
         title: "Full-Stack Development",
-        description: "Proficient in building end-to-end web applications using modern technologies."
+        description: "Building complete web solutions from interface to database."
     },
     {
         icon: Layout,
@@ -55,36 +55,32 @@ export const About = () => {
                         <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase">About Me</span>
                     </div>
                     <h2 className="text-4xl md:text-5xl font-bold leading-tight animate-fade-in animation-delay-100 text-secondary-foreground">
-                        Building the future,
-                        <span className="font-serif italic font-normal text-white"> one component at a time.</span>
+                        Turning ideas into
+                        <span className="font-serif italic font-normal text-white"> real-world digital solutions.</span>
                     </h2>
                     <div className="space-y-4 text-muted-foreground animate-fade-in animation-delay-200">
                         <p>
-                            I'm a passionate software engineer with over 5 years of
-                            experience crafting digital products that make a difference. My
-                            journey started with a curiosity for how things work on the web,
-                            and it has evolved into a deep expertise in modern frontend
-                            technologies.
+                            I’m a Full-Stack Developer with a background in Information Systems 
+                            and a passion for building web applications that are both functional and user-centered. 
+                            My journey started with a curiosity about how systems work behind the scenes — 
+                            and grew into a career focused on designing, developing, and deploying end-to-end digital experiences.
                         </p>
                         <p>
-                            I specialize in React, Next.js, and TypeScript, building
-                            everything from sleek landing pages to complex enterprise
-                            applications. My approach combines technical excellence with a
-                            keen eye for design and user experience.
+                            I specialize in PHP, MySQL, and modern front-end tools like Bootstrap, Tailwind, and JavaScript, 
+                            creating everything from responsive company websites to custom web systems that streamline workflows and improve efficiency. 
+                            My approach blends clean code, thoughtful UI, and practical automation to deliver solutions that actually make an impact.
                         </p>
                         <p>
-                            When I'm not coding, you'll find me exploring new technologies,
-                            contributing to open-source projects, or sharing knowledge with
-                            the developer community.
+                            When I’m not coding, I’m exploring new technologies, 
+                            refining my design skills in Figma, and continuously learning better ways to build smarter, 
+                            faster, and more scalable web products.
                         </p>
             
                     </div>
 
                     <div className="glass rounded-2xl p-6 glow-border animate-fade-in animation-delay-300">
                         <p className="text-lg font-medium italic text-foreground">
-                            "My mission is to create web experiences that are not 
-                            only functional but also delightful, ensuring every 
-                            user interaction is seamless and engaging."
+                            “I design and develop web experiences that don’t just work — they inspire confidence and drive results.”
                         </p>
                     </div>
                 </div>

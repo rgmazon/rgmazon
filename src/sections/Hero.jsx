@@ -5,7 +5,6 @@ import {
   ChevronDown,
   Github,
   Linkedin,
-  Facebook,
   Download,
 } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
@@ -25,6 +24,23 @@ const skills = [
     "PHP",
     "MySQL",
     "Laravel"
+];  
+
+const skillIcons = [
+    { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { name: "React.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+    { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+    { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+    { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+    { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+    { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+    { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+    { name: "Github", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+    { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+    { name: "WordPress", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" },
+    { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+    { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+    { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" },
 ];  
 
 export const Hero = () => {
@@ -77,19 +93,18 @@ export const Hero = () => {
                     {/* Headline */}
                     <div className="space-y-4">
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in animation-delay-100">
-                            Crafting <span className="text-primary glow-text">digital</span> 
+                            Turning <span className="text-primary glow-text">ideas</span> 
                             <br />
-                            experiences with 
+                            into high-impact
                             <br /> 
                             <span className="font-serif italic font-normal text-white">
-                                precision.
+                                web experiences
                             </span>
                         </h1>
 
                         <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">
-                            Hi, I'm RG Mazon — a passionate web developer dedicated to building 
-                            beautiful and functional digital experiences. Let's create something 
-                            amazing together.
+                            Hi, I'm RG Mazon — Turning ideas into interactive, high-performing web solutions is what I do best. 
+                            I design, develop, and deploy digital products that feel great to use and are built to scale.
                         </p>
 
 
@@ -117,9 +132,8 @@ export const Hero = () => {
                     <div className="flex items-center gap-4 animate-fade-in animation-delay-400">
                         <span className="text-sm text-muted-foreground">Follow: </span>
                         {[
-                            { icon: Github, href: "#" },
-                            { icon: Linkedin, href: "#" },
-                            { icon: Facebook, href: "#" },
+                            { icon: Github, href: "https://github.com/rgmazon" },
+                            { icon: Linkedin, href: "https://www.linkedin.com/in/rgmazon/" },
                         ].map((social, idx) => (
                             <a key={idx} href={social.href} className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300">
                                 {<social.icon className="w-5 h-5" />}
@@ -176,6 +190,22 @@ export const Hero = () => {
                         {[...skills, ...skills].map((skill, idx) => (
                             <div key={idx} className="flex-shrink-0 px-8 py-4">
                                 <span className="text-xl font-semibold text-muted-foreground/50 hover:text-muted-foreground transition-colors">{skill}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Skill Icons - Reverse Direction */}
+                <div className="relative overflow-hidden mb-10">
+                    <div className="flex animate-marquee-reverse">
+                        {[...skillIcons, ...skillIcons, ...skillIcons].map((skill, idx) => (
+                            <div key={idx} className="flex-shrink-0 px-6 py-4">
+                                <img 
+                                    src={skill.icon} 
+                                    alt={skill.name} 
+                                    title={skill.name}
+                                    className="w-5 h-5 opacity-50 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0" 
+                                />
                             </div>
                         ))}
                     </div>
