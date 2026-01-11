@@ -11,7 +11,7 @@ import {
 
 const skills = [
     "JavaScript",
-    "React",
+    "React.js",
     "Node.js",
     "CSS",
     "HTML",
@@ -28,7 +28,7 @@ const skills = [
 
 export const Hero = () => {
 
-    return <section className="relative min-h-screen flex items-center overflow-hidden">
+    return <section className="relative min-h-screen flex items-center overflow-hidden" id="hero">
 
         {/* Background Elements */}
         <div className="absolute inset-0 z-0">
@@ -48,7 +48,7 @@ export const Hero = () => {
                 <div 
                     className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
                     style={{
-                        backgroundColor: "#20b2a6",
+                        backgroundColor: "#5966cc",
                         left: `${Math.random() * 100}%`,
                         top: `${Math.random() * 100}%`,
                         animation: `slow-drift ${15 + Math.random() * 20}s ease-in-out infinite`,
@@ -60,7 +60,6 @@ export const Hero = () => {
         </div>
 
         {/* Content */ }
-
         <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
 
@@ -97,14 +96,18 @@ export const Hero = () => {
                     {/* Call to Action Buttons */}
                     <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
 
-                        <Button size="lg">
-                            Contact Me <ArrowRight className="w-5 h-5" />
-                        </Button>
+                        <a href="#contact">
+                            <Button size="lg">
+                                Contact Me <ArrowRight className="w-5 h-5" />
+                            </Button>
+                        </a>
 
-                        <AnimatedBorderButton>
-                            <Download className="w-5 h-5" />
-                            Download CV
-                        </AnimatedBorderButton>
+                        <a href="/assets/MazonRudolfh.pdf" download>
+                            <AnimatedBorderButton>
+                                <Download className="w-5 h-5" />
+                                Download CV
+                            </AnimatedBorderButton>
+                        </a>
 
                     </div>
 

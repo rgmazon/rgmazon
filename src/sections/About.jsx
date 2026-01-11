@@ -26,8 +26,29 @@ const highlights = [
 
 export const About = () => {
     return <section className="py-32 relative overflow-hidden" id="about">
+
+        {/* Green Dots */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+
+
+            {[...Array(30)].map((_, i) => (
+                <div 
+                    className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
+                    style={{
+                        backgroundColor: "#5966cc",
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                        animation: `slow-drift ${15 + Math.random() * 20}s ease-in-out infinite`,
+                        animationDelay: `${Math.random() * 5}s`,
+                    }}
+                /> 
+            ))}
+
+        </div>
+
         <div className="container mx-auto px-6 relative z-10">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
+
                 {/* Left Column - Text Content */}
                 <div className="space-y-8">
                     <div className="animate-fade-in">
@@ -58,6 +79,29 @@ export const About = () => {
                         </p>
             
                     </div>
+
+                    <div className="glass rounded-2xl p-6 glow-border animate-fade-in animation-delay-300">
+                        <p className="text-lg font-medium italic text-foreground">
+                            "My mission is to create web experiences that are not 
+                            only functional but also delightful, ensuring every 
+                            user interaction is seamless and engaging."
+                        </p>
+                    </div>
+                </div>
+
+                {/* Right Column - Highlights */}
+                <div className="grid sm:grid-cols-2 gap-6">
+                    {highlights.map((item, idx) => (
+                        <div key={idx} 
+                             className="glass p-6 rounded-2xl animate-fade-in" 
+                             style={{ animationDelay: `${400 + idx * 100}ms` }}>
+                            <div className="w-12 h-12 rounded-xl bg-0primary/10 flex items-center justify-center mb-4 hover:bg-primary/20">
+                                <item.icon className="w-6 h-6 text-primary" />
+                            </div>
+                            <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                            <p className="text-sm text-muted-foreground">{item.description}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
