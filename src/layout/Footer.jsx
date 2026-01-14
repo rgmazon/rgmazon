@@ -61,3 +61,6 @@ export const Footer = () => {
     </footer>
   );
 };
+
+
+// last updated: January 2026
