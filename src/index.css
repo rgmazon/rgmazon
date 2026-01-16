@@ -250,3 +250,13 @@
   }
 
 }
+
+/* Hide scrollbars when modal is open (cross-browser) */
+.modal-hide-scrollbar, .modal-hide-scrollbar * {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.modal-hide-scrollbar::-webkit-scrollbar,
+.modal-hide-scrollbar *::-webkit-scrollbar {
+  display: none; /* WebKit */
+}

@@ -3,12 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+
+    <!-- Google Sans Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet" />
+
+    <link rel="canonical" href="https://rgmazon.pages.dev/" />
+    
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,22 +29,54 @@
     <meta name="twitter:description" content="Dedicated Front-end Developer specializing in React and modern web technologies. View my latest projects, technical skills, and professional journey in building seamless user experiences.">
     <meta name="twitter:image" content="https://rgmazon.pages.dev/og-image.png">
 
+    <meta name="robots" content="index, follow" />
+
+    
+
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "RG Mazon",
-      "url": "https://rgmazon.pages.dev/",
-      "jobTitle": "Front-end Developer",
-      "knowsAbout": ["React.js", "JavaScript", "Tailwind CSS", "Vite", "Web Performance", "UI/UX", "Responsive Design", "PHP", "MySQL", "Laravel", "APIs"],
-      "sameAs": [
-        "https://github.com/rgmazon/",
-        "https://linkedin.com/in/rgmazon/"
-      ],
-      "description": "Front-end Developer specializing in high-performance web applications and responsive UI design."
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://rgmazon.pages.dev/#person",
+          "name": "RG Mazon",
+          "url": "https://rgmazon.pages.dev/",
+          "jobTitle": "Front-end Developer",
+          "description": "Front-end Developer specializing in high-performance web applications and responsive UI design.",
+          "knowsAbout": [
+            "React.js",
+            "JavaScript",
+            "Tailwind CSS",
+            "Vite",
+            "Web Performance",
+            "UI/UX",
+            "Responsive Design",
+            "PHP",
+            "MySQL",
+            "Laravel",
+            "APIs"
+          ],
+          "sameAs": [
+            "https://github.com/rgmazon/",
+            "https://linkedin.com/in/rgmazon/"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://rgmazon.pages.dev/#website",
+          "url": "https://rgmazon.pages.dev/",
+          "name": "RG Mazon Portfolio",
+          "publisher": {
+            "@type": "Person",
+            "@id": "https://rgmazon.pages.dev/#person"
+          }
+        }
+      ]
     }
     </script>
+
 
 
   </head>

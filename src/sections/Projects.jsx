@@ -1,94 +1,87 @@
+import { useState } from "react";
 import { ArrowUpRight, Github } from "lucide-react";
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
+import ProjectModal from "../components/ProjectModal";
 
-// const projects = [
-//     {
-//         title: "FLIQUEY Social",
-//         description: "Description for project one.",
-//         image: "/assets/projects/fliquey.avif",
-//         tags: ["PHP", "MySQL", "JavaScript", "Bootstrap", "Smarty Template Engine", "Docker"],
-//         link: "https://social.fliquey.com/",
-//         github: "#"
-//     },
-//     {
-//         title: "Applemax Stream",
-//         description: "Description for project two.",
-//         image: "/assets/projects/applemax-stream.avif",
-//         tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Docker", "JavaScript"],
-//         link: "#",
-//         github: "#"
-//     },
-//     {
-//         title: "FLIQUEY Landing Page",
-//         description: "Description for project three.",
-//         image: "/assets/projects/fliquey-landing.avif",
-//         tags: ["Bootstrap", "PHP", "JavaScript"],
-//         link: "#",
-//         github: "#"
-//     },
-//     {
-//         title: "Professional Portfolio",
-//         description: "Description for project four.",
-//         image: "/assets/projects/professional-portfolio.avif",
-//         tags: ["React.js", "TailwindCSS", "JavaScript", "Cloudflare Pages", "EmailJS"],
-//         link: "https://rgmazon.pages.dev/",
-//         github: "#"
-//     },
-//     {
-//         title: "Consbeez Call Center Services Website",
-//         description: "Designed, developed, deployed, and maintained the official website of Consbeez, delivering a fast, responsive, and user-focused web experience.",
-//         image: "/assets/projects/consbeez.png",
-//         tags: ["Bootstrap", "JavaScript", "PHP", "PHPMailer"],
-//         link: "https://consbeez.com/",
-//         github: "#"
-//     }
-// ]
+
 const projects = [
   {
     title: "FLIQUEY Social",
     description: "A full-featured social networking platform built with PHP and MySQL, featuring user profiles, real-time interactions, and a responsive UI. Utilizes the Smarty template engine for clean separation of logic and design, and Docker for streamlined development and deployment.",
-    image: "/assets/projects/fliquey.avif",
+    image: "/assets/projects/fliqueySocial/fliquey.avif",
     tags: ["PHP", "MySQL", "JavaScript", "Bootstrap", "Smarty Template Engine", "Docker"],
     link: "https://social.fliquey.com/",
-    github: "#"
+    github: "#",
+    moreImages: [
+      "/assets/projects/fliqueySocial/fliquey-1.avif",
+      "/assets/projects/fliqueySocial/fliquey-2.avif",
+      "/assets/projects/fliqueySocial/fliquey-3.avif"
+    ]
   },
   {
     title: "Applemax Stream",
     description: "A media streaming web application developed using Laravel and MySQL, designed for performance and scalability. Includes a modern, responsive interface built with Bootstrap and dynamic features powered by JavaScript, all containerized with Docker for efficient deployment.",
-    image: "/assets/projects/applemax-stream.avif",
+    image: "/assets/projects/applemaxStream/applemax-stream.avif",
     tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Docker", "JavaScript"],
     link: "#",
-    github: "#"
+    github: "#",
+    moreImages: [
+      "/assets/projects/applemaxStream/applemax-stream-1.avif",
+      "/assets/projects/applemaxStream/applemax-stream-2.avif",
+      "/assets/projects/applemaxStream/applemax-stream-3.avif"
+    ]
   },
   {
     title: "FLIQUEY Landing Page",
     description: "A conversion-focused landing page created to promote the FLIQUEY platform. Built with Bootstrap, PHP, and JavaScript to ensure fast loading, mobile responsiveness, and seamless user interaction.",
-    image: "/assets/projects/fliquey-landing.avif",
+    image: "/assets/projects/fliqueyLanding/fliqueyLanding.avif",
     tags: ["Bootstrap", "PHP", "JavaScript"],
     link: "#",
-    github: "#"
+    github: "#",
+    moreImages: [
+      "/assets/projects/fliqueyLanding/fliqueyLanding-1.avif",
+      "/assets/projects/fliqueyLanding/fliqueyLanding-2.avif",
+      "/assets/projects/fliqueyLanding/fliqueyLanding-3.avif"
+    ]
   },
   {
     title: "Professional Portfolio",
     description: "A modern personal portfolio website built with React and TailwindCSS, showcasing projects and skills with a clean, responsive design. Deployed on Cloudflare Pages and integrated with EmailJS for direct contact functionality.",
-    image: "/assets/projects/professional-portfolio.avif",
-    tags: ["React.js", "TailwindCSS", "JavaScript", "Cloudflare Pages", "EmailJS"],
+    image: "/assets/projects/professionalPortfolio/professionalPortfolio.avif",
+    tags: ["React.js", "TailwindCSS", "JavaScript", "Cloudflare Pages", "EmailJS", "SEO", "Vite"],
     link: "https://rgmazon.pages.dev/",
-    github: "#"
+    github: "#",
+    moreImages: [
+      "/assets/projects/professionalPortfolio/professionalPortfolio-1.avif",
+      "/assets/projects/professionalPortfolio/professionalPortfolio-2.avif",
+      "/assets/projects/professionalPortfolio/professionalPortfolio-3.avif",
+      "/assets/projects/professionalPortfolio/professionalPortfolio-4.avif",
+      "/assets/projects/professionalPortfolio/professionalPortfolio-5.avif"
+    ]
   },
   {
     title: "Consbeez Call Center Services Website",
     description: "Designed, developed, deployed, and maintained the official website of Consbeez, delivering a fast, responsive, and user-focused web experience. Built with PHP, Bootstrap, and JavaScript, with PHPMailer integration for reliable client inquiries and email handling.",
-    image: "/assets/projects/consbeez.png",
-    tags: ["Bootstrap", "JavaScript", "PHP", "PHPMailer"],
+    image: "/assets/projects/consbeez/consbeez.avif",
+    tags: ["Bootstrap", "JavaScript", "PHP", "PHPMailer", "SEO"],
     link: "https://consbeez.com/",
-    github: "#"
+    github: "#",
+    moreImages: [
+      "/assets/projects/consbeez/consbeez-1.avif",
+      "/assets/projects/consbeez/consbeez-2.avif",
+      "/assets/projects/consbeez/consbeez-3.avif"
+    ]
   }
 ];
 
 
 
 export const Projects = () => {
+    const [selectedProject, setSelectedProject] = useState(null);
+
+    const openProject = (p) => setSelectedProject(p);
+    const closeProject = () => setSelectedProject(null);
+
     return (
         <section className="py-32 relative overflow-hidden" id="projects">
 
@@ -136,8 +129,13 @@ export const Projects = () => {
                 {/* Projects Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.map((project, idx) => (
-                        <div key={idx} 
-                            className="group glass rounded-2xl overflow-hidden animate-fade-in md:row-span-1"
+                        <div
+                            key={idx}
+                            role="button"
+                            tabIndex={0}
+                            onClick={() => openProject(project)}
+                            onKeyDown={(e) => { if (e.key === 'Enter') openProject(project); }}
+                            className="group glass rounded-2xl overflow-hidden animate-fade-in md:row-span-1 cursor-pointer"
                             style={{ animationDelay: `${(idx + 1) * 100}ms` }}
                         >
                             {/* Image */}
@@ -149,14 +147,16 @@ export const Projects = () => {
                                 />
                                 {/* Overlay Links */}
                                 <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <a 
-                                        href={project.link} 
+                                    <a
+                                        href={project.link}
+                                        onClick={(e) => e.stopPropagation()}
                                         className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
                                     >
                                         <ArrowUpRight className="w-5 h-5" />
                                     </a>
-                                    <a 
-                                        href={project.github} 
+                                    <a
+                                        href={project.github}
+                                        onClick={(e) => e.stopPropagation()}
                                         className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
                                     >
                                         <Github className="w-5 h-5" />
@@ -196,6 +196,10 @@ export const Projects = () => {
                         </div>
                     ))}
                 </div>
+
+                {selectedProject && (
+                    <ProjectModal project={selectedProject} onClose={closeProject} />
+                )}
 
                 {/* View All CTA */}
                 <div className="text-center mt-12 animate-fade-in animation-delay-500">
