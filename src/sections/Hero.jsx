@@ -16,14 +16,13 @@ const skills = [
     "CSS",
     "HTML",
     "Tailwind CSS",
-    "Next.js",
-    "TypeScript",
     "Github",
     "Figma",
     "WordPress",
     "PHP",
     "MySQL",
-    "Laravel"
+    "Laravel",
+    "Vite"
 ];  
 
 const skillIcons = [
@@ -33,14 +32,15 @@ const skillIcons = [
     { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
     { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
     { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
-    { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-    { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+    // { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+    //{ name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
     { name: "Github", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
     { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
     { name: "WordPress", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" },
     { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
     { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
     { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" },
+    { name: "Vite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg" }
 ];  
 
 export const Hero = () => {
@@ -86,7 +86,7 @@ export const Hero = () => {
                     <div className="animate-dfade-in">
                         <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary">
                             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                                Web Developer · Fur Dzaddy
+                                RG Mazon · Front-End Developer Portfolio
                         </span>
                     </div>
 
@@ -154,7 +154,7 @@ export const Hero = () => {
                         />
                         <div className="relative glass rounded-3xl p-2 glow-border">
                             <img 
-                                src={isDarkMode ? "/assets/profile-image-dark.avif" : "/assets/profile-image-nekkid.avif"}
+                                src={isDarkMode ? "/assets/profile-image-dark.avif" : "/assets/profile-image-light.avif"}
                                 alt="RG Mazon" 
                                 className="w-full aspect-[4/5] object-cover rounded-2xl" 
                             />

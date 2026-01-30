@@ -9,6 +9,7 @@ const projects = [
     title: "FLIQUEY Social",
     description: "A full-featured social networking platform built with PHP and MySQL, featuring user profiles, real-time interactions, and a responsive UI. Utilizes the Smarty template engine for clean separation of logic and design, and Docker for streamlined development and deployment.",
     image: "/assets/projects/fliqueySocial/fliquey.avif",
+    // video: "/assets/projects/fliqueySocial/fliquey-video.webm",
     tags: ["PHP", "MySQL", "JavaScript", "Bootstrap", "Smarty Template Engine", "Docker"],
     link: "https://social.fliquey.com/",
     github: "#",
@@ -22,6 +23,7 @@ const projects = [
     title: "Applemax Stream",
     description: "A media streaming web application developed using Laravel and MySQL, designed for performance and scalability. Includes a modern, responsive interface built with Bootstrap and dynamic features powered by JavaScript, all containerized with Docker for efficient deployment.",
     image: "/assets/projects/applemaxStream/applemax-stream.avif",
+    // video: "/assets/projects/applemaxStream/applemax-stream-video.webm",
     tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Docker", "JavaScript"],
     link: "#",
     github: "#",
@@ -35,6 +37,7 @@ const projects = [
     title: "FLIQUEY Landing Page",
     description: "A conversion-focused landing page created to promote the FLIQUEY platform. Built with Bootstrap, PHP, and JavaScript to ensure fast loading, mobile responsiveness, and seamless user interaction.",
     image: "/assets/projects/fliqueyLanding/fliqueyLanding.avif",
+    // video: "/assets/projects/fliqueyLanding/fliqueyLanding-video.webm",
     tags: ["Bootstrap", "PHP", "JavaScript"],
     link: "#",
     github: "#",
@@ -48,6 +51,7 @@ const projects = [
     title: "Professional Portfolio",
     description: "A modern personal portfolio website built with React and TailwindCSS, showcasing projects and skills with a clean, responsive design. Deployed on Cloudflare Pages and integrated with EmailJS for direct contact functionality.",
     image: "/assets/projects/professionalPortfolio/professionalPortfolio.avif",
+    video: "/assets/projects/professionalPortfolio/professionalPortfolio-video.webm",
     tags: ["React.js", "TailwindCSS", "JavaScript", "Cloudflare Pages", "EmailJS", "SEO", "Vite"],
     link: "https://rgmazon.pages.dev/",
     github: "#",
@@ -63,6 +67,7 @@ const projects = [
     title: "Consbeez Call Center Services Website",
     description: "Designed, developed, deployed, and maintained the official website of Consbeez, delivering a fast, responsive, and user-focused web experience. Built with PHP, Bootstrap, and JavaScript, with PHPMailer integration for reliable client inquiries and email handling.",
     image: "/assets/projects/consbeez/consbeez.avif",
+    video: "/assets/projects/consbeez/consbeez-video.webm",
     tags: ["Bootstrap", "JavaScript", "PHP", "PHPMailer", "SEO"],
     link: "https://consbeez.com/",
     github: "#",
@@ -70,6 +75,20 @@ const projects = [
       "/assets/projects/consbeez/consbeez-1.avif",
       "/assets/projects/consbeez/consbeez-2.avif",
       "/assets/projects/consbeez/consbeez-3.avif"
+    ]
+  },
+  {
+    title: "Blaseek Landing Page",
+    description: "A sleek and modern landing page for Blaseek, crafted with TailwindCSS and JavaScript to ensure a responsive design and engaging user experience. Focused on clear calls-to-action and optimized for conversions.",
+    image: "/assets/projects/blaseek/blaseek.avif",
+    video: "/assets/projects/blaseek/blaseek-video.webm",
+    tags: ["TailwindCSS", "JavaScript", "React.js", "EmailJS", "Vite", "SEO"],
+    link: "https://blaseek.com/",
+    github: "#",
+    moreImages: [
+      "/assets/projects/blaseek/blaseek-1.avif",
+      "/assets/projects/blaseek/blaseek-2.avif",
+      "/assets/projects/blaseek/blaseek-3.avif"
     ]
   }
 ];

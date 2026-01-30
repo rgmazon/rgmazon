@@ -4,9 +4,12 @@ import { ArrowUpRight, Github, ChevronDown, X, ChevronLeft, ChevronRight } from 
 import { useTheme } from "../context/ThemeContext";
 
 const Carousel = ({ project }) => {
-    const base = project.image ? [project.image] : [];
-    const extra = Array.isArray(project.moreImages) ? project.moreImages : [];
-    const images = [...base, ...extra];
+    const base = project.image ? [{ type: 'image', src: project.image }] : [];
+    const extra = Array.isArray(project.moreImages) 
+        ? project.moreImages.map(src => ({ type: 'image', src })) 
+        : [];
+    const video = project.video ? [{ type: 'video', src: project.video }] : [];
+    const media = [...base, ...video, ...extra];
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
@@ -15,35 +18,49 @@ const Carousel = ({ project }) => {
 
     useEffect(() => {
         const onKey = (e) => {
-            if (e.key === 'ArrowLeft') setIndex((i) => (i - 1 + images.length) % images.length);
-            if (e.key === 'ArrowRight') setIndex((i) => (i + 1) % images.length);
+            if (e.key === 'ArrowLeft') setIndex((i) => (i - 1 + media.length) % media.length);
+            if (e.key === 'ArrowRight') setIndex((i) => (i + 1) % media.length);
         };
         document.addEventListener('keydown', onKey);
         return () => document.removeEventListener('keydown', onKey);
-    }, [images.length]);
+    }, [media.length]);
 
-    if (!images.length) return null;
+    if (!media.length) return null;
 
-    const prev = (e) => { e.stopPropagation(); setIndex((i) => (i - 1 + images.length) % images.length); };
-    const next = (e) => { e.stopPropagation(); setIndex((i) => (i + 1) % images.length); };
+    const prev = (e) => { e.stopPropagation(); setIndex((i) => (i - 1 + media.length) % media.length); };
+    const next = (e) => { e.stopPropagation(); setIndex((i) => (i + 1) % media.length); };
 
     return (
         <div className="h-full w-full flex flex-col items-center justify-center">
             <div className="relative w-full h-full bg-black/5 rounded-lg overflow-hidden flex items-center justify-center">
-                {images.map((src, i) => (
-                    <img
-                        key={i}
-                        src={src}
-                        alt={`${project.title} — image ${i + 1}`}
-                        className={`absolute inset-0 m-auto max-w-full max-h-full object-contain transition-opacity duration-500 ease-in-out ${
-                            i === index ? "opacity-100" : "opacity-0"
-                        }`}
-                        draggable={false}
-                    />
+                {media.map((item, i) => (
+                    item.type === 'video' ? (
+                        <video
+                            key={i}
+                            src={item.src}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            className={`absolute inset-0 m-auto max-w-full max-h-full object-contain transition-opacity duration-500 ease-in-out ${
+                                i === index ? "opacity-100" : "opacity-0"
+                            }`}
+                        />
+                    ) : (
+                        <img
+                            key={i}
+                            src={item.src}
+                            alt={`${project.title} — image ${i + 1}`}
+                            className={`absolute inset-0 m-auto max-w-full max-h-full object-contain transition-opacity duration-500 ease-in-out ${
+                                i === index ? "opacity-100" : "opacity-0"
+                            }`}
+                            draggable={false}
+                        />
+                    )
                 ))}
 
                 {/* Prev/Next controls */}
-                {images.length > 1 && (
+                {media.length > 1 && (
                     <>
                         <button onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full shadow-lg" aria-label="Previous">
                             <ChevronLeft className="w-4 h-4" />
@@ -56,15 +73,19 @@ const Carousel = ({ project }) => {
             </div>
 
             {/* Thumbnails */}
-            {images.length > 1 && (
+            {media.length > 1 && (
                 <div className="mt-3 flex gap-2 overflow-x-auto w-full">
-                    {images.map((src, i) => (
+                    {media.map((item, i) => (
                         <button
                             key={i}
                             onClick={(e) => { e.stopPropagation(); setIndex(i); }}
                             className={`flex-none w-20 rounded overflow-hidden border inline-flex items-center justify-center ${i === index ? 'ring-2 ring-primary' : 'border-border/40'}`}
                         >
-                            <img src={src} alt={`${project.title} — thumbnail ${i + 1}`} className="max-h-12 max-w-full object-contain" />
+                            {item.type === 'video' ? (
+                                <video src={item.src} className="max-h-12 max-w-full object-contain" muted />
+                            ) : (
+                                <img src={item.src} alt={`${project.title} — thumbnail ${i + 1}`} className="max-h-12 max-w-full object-contain" />
+                            )}
                         </button>
                     ))}
                 </div>
