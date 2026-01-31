@@ -110,6 +110,7 @@ export const Projects = () => {
 
                 {[...Array(30)].map((_, i) => (
                     <div 
+                        key={i}
                         className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
                         style={{
                             backgroundColor: "#5966cc",
@@ -149,7 +150,7 @@ export const Projects = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.map((project, idx) => (
                         <div
-                            key={idx}
+                            key={project.title}
                             role="button"
                             tabIndex={0}
                             onClick={() => openProject(project)}
@@ -207,7 +208,7 @@ export const Projects = () => {
                                                     font-medium border border-border/50 text-muted-foreground 
                                                     hover:border-primary/50 hover:text-primary transition-all 
                                                     duration-300 hover:cursor-pointer" 
-                                            key={tagIdx}>{tag}
+                                            key={`${project.title}-${tag}-${tagIdx}`}>{tag}
                                         </span>
                                     ))}
                                 </div>
@@ -221,12 +222,12 @@ export const Projects = () => {
                 )}
 
                 {/* View All CTA */}
-                <div className="text-center mt-12 animate-fade-in animation-delay-500">
+                {/* <div className="text-center mt-12 animate-fade-in animation-delay-500">
                     <AnimatedBorderButton>  
                         View All Projects
                         <ArrowUpRight className="w-5 h-5" />
                     </AnimatedBorderButton>  
-                </div>
+                </div> */}
 
             </div>
         </section>

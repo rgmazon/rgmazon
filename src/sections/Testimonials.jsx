@@ -4,7 +4,7 @@ import { useState } from "react";
 const testimonials = [
   {
     quote:
-      "Even as a beginner, RG did a great job handling my project. They were very eager to learn, open to feedback, and made sure everything worked as expected. I really appreciated the effort and dedication.",
+      "Even as a beginner, RG did a great job handling my project. He was very eager to learn, open to feedback, and made sure everything worked as expected. I really appreciated the effort and dedication.",
     author: "April L.",
     role: "Start-up Founder",
     avatar:
@@ -12,7 +12,7 @@ const testimonials = [
   },
   {
     quote:
-      "I liked how transparent RG was throughout the process. They explained what they could do, asked questions when unsure, and kept improving the project step by step. The final result turned out better than I expected.",
+      "I liked how transparent RG was throughout the process. He explained what he could do, asked questions when unsure, and kept improving the project step by step. The final result turned out better than I expected.",
     author: "Anonymous",
     role: "Small Business Owner",
     avatar:
@@ -20,7 +20,7 @@ const testimonials = [
   },
   {
     quote:
-      "For someone early in their development career, RG showed a lot of potential. They were patient, hardworking, and made sure to fix issues quickly. You can really see their passion for web development.",
+      "For someone early in their development career, RG showed a lot of potential. He was patient, hardworking, and made sure to fix issues quickly. You can really see his passion for web development.",
     author: "Emily W.",
     role: "Project Coordinator",
     avatar:
@@ -28,7 +28,7 @@ const testimonials = [
   },
   {
     quote:
-      "RG may be starting out, but the commitment to doing quality work is already there. They listened carefully to my needs and delivered a clean, functional website. I’d happily work with them again.",
+      "RG may be starting out, but the commitment to doing quality work is already there. He listened carefully to my needs and delivered a clean, functional website. I’d happily work with him again.",
     author: "Anonymous",
     role: "HR Personnel",
     avatar:
@@ -57,6 +57,7 @@ export const Testimonials = () => {
 
                 {[...Array(30)].map((_, i) => (
                     <div 
+                        key={i}
                         className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
                         style={{
                             backgroundColor: "#5966cc",
@@ -127,6 +128,7 @@ export const Testimonials = () => {
                             <div className="flex gap-2">
                                 {testimonials.map((_, idx) => (
                                     <button
+                                        key={idx}
                                         onClick={() => setActiveIdx(idx)} 
                                         className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === activeIdx ? "w-8 bg-primary" : "bg-muted-foreground/30 hover:bg-muted-foreground/50"}`} 
                                     />

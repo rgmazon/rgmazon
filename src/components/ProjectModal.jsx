@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { ArrowUpRight, Github, ChevronDown, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, Github, ChevronDown, X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
 const Carousel = ({ project }) => {
@@ -11,6 +11,7 @@ const Carousel = ({ project }) => {
     const video = project.video ? [{ type: 'video', src: project.video }] : [];
     const media = [...base, ...video, ...extra];
     const [index, setIndex] = useState(0);
+    const [fullscreen, setFullscreen] = useState(false);
 
     useEffect(() => {
         setIndex(0);
@@ -20,77 +21,158 @@ const Carousel = ({ project }) => {
         const onKey = (e) => {
             if (e.key === 'ArrowLeft') setIndex((i) => (i - 1 + media.length) % media.length);
             if (e.key === 'ArrowRight') setIndex((i) => (i + 1) % media.length);
+            if (e.key === 'Escape' && fullscreen) setFullscreen(false);
         };
         document.addEventListener('keydown', onKey);
         return () => document.removeEventListener('keydown', onKey);
-    }, [media.length]);
+    }, [media.length, fullscreen]);
 
     if (!media.length) return null;
 
     const prev = (e) => { e.stopPropagation(); setIndex((i) => (i - 1 + media.length) % media.length); };
     const next = (e) => { e.stopPropagation(); setIndex((i) => (i + 1) % media.length); };
+    const openFullscreen = (e) => { e.stopPropagation(); setFullscreen(true); };
+    const closeFullscreen = (e) => { e.stopPropagation(); setFullscreen(false); };
 
     return (
-        <div className="h-full w-full flex flex-col items-center justify-center">
-            <div className="relative w-full h-full bg-black/5 rounded-lg overflow-hidden flex items-center justify-center">
-                {media.map((item, i) => (
-                    item.type === 'video' ? (
+        <>
+            <div className="h-full w-full flex flex-col items-center justify-center">
+                <div className="relative w-full h-full bg-black/5 rounded-lg overflow-hidden flex items-center justify-center group">
+                    {media.map((item, i) => (
+                        item.type === 'video' ? (
+                            <video
+                                key={i}
+                                src={item.src}
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                onClick={openFullscreen}
+                                className={`absolute inset-0 m-auto max-w-full max-h-full object-contain transition-opacity duration-500 ease-in-out cursor-pointer ${
+                                    i === index ? "opacity-100" : "opacity-0"
+                                }`}
+                            />
+                        ) : (
+                            <img
+                                key={i}
+                                src={item.src}
+                                alt={`${project.title} — image ${i + 1}`}
+                                onClick={openFullscreen}
+                                className={`absolute inset-0 m-auto max-w-full max-h-full object-contain transition-opacity duration-500 ease-in-out cursor-pointer ${
+                                    i === index ? "opacity-100" : "opacity-0"
+                                }`}
+                                draggable={false}
+                            />
+                        )
+                    ))}
+                    
+                    {/* Fullscreen button */}
+                    <button 
+                        onClick={openFullscreen}
+                        className="absolute top-3 right-3 bg-black/40 text-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" 
+                        aria-label="Fullscreen"
+                    >
+                        <Maximize2 className="w-4 h-4" />
+                    </button>
+
+                    {/* Prev/Next controls */}
+                    {media.length > 1 && (
+                        <>
+                            <button onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full shadow-lg z-10" aria-label="Previous">
+                                <ChevronLeft className="w-4 h-4" />
+                            </button>
+                            <button onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full shadow-lg z-10" aria-label="Next">
+                                <ChevronRight className="w-4 h-4" />
+                            </button>
+                        </>
+                    )}
+                </div>
+
+                {/* Thumbnails */}
+                {media.length > 1 && (
+                    <div className="mt-3 flex gap-2 overflow-x-auto w-full">
+                        {media.map((item, i) => (
+                            <button
+                                key={i}
+                                onClick={(e) => { e.stopPropagation(); setIndex(i); }}
+                                className={`flex-none w-20 rounded overflow-hidden border inline-flex items-center justify-center ${i === index ? 'ring-2 ring-primary' : 'border-border/40'}`}
+                            >
+                                {item.type === 'video' ? (
+                                    <video src={item.src} className="max-h-12 max-w-full object-contain" muted />
+                                ) : (
+                                    <img src={item.src} alt={`${project.title} — thumbnail ${i + 1}`} className="max-h-12 max-w-full object-contain" />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            {/* Fullscreen Modal */}
+            {fullscreen && createPortal(
+                <div 
+                    className="fixed inset-0 bg-black z-[99999] flex items-center justify-center"
+                    onClick={closeFullscreen}
+                >
+                    {/* Close button */}
+                    <button 
+                        onClick={closeFullscreen}
+                        className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full shadow-lg z-10 backdrop-blur-sm transition-all"
+                        aria-label="Close fullscreen"
+                    >
+                        <X className="w-6 h-6" />
+                    </button>
+
+                    {/* Navigation in fullscreen */}
+                    {media.length > 1 && (
+                        <>
+                            <button 
+                                onClick={prev}
+                                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full shadow-lg z-10 backdrop-blur-sm transition-all"
+                                aria-label="Previous"
+                            >
+                                <ChevronLeft className="w-6 h-6" />
+                            </button>
+                            <button 
+                                onClick={next}
+                                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full shadow-lg z-10 backdrop-blur-sm transition-all"
+                                aria-label="Next"
+                            >
+                                <ChevronRight className="w-6 h-6" />
+                            </button>
+                        </>
+                    )}
+
+                    {/* Current media item */}
+                    {media[index].type === 'video' ? (
                         <video
-                            key={i}
-                            src={item.src}
+                            src={media[index].src}
                             autoPlay
                             muted
                             loop
                             playsInline
-                            className={`absolute inset-0 m-auto max-w-full max-h-full object-contain transition-opacity duration-500 ease-in-out ${
-                                i === index ? "opacity-100" : "opacity-0"
-                            }`}
+                            onClick={(e) => e.stopPropagation()}
+                            className="max-w-[95vw] max-h-[95vh] object-contain"
                         />
                     ) : (
                         <img
-                            key={i}
-                            src={item.src}
-                            alt={`${project.title} — image ${i + 1}`}
-                            className={`absolute inset-0 m-auto max-w-full max-h-full object-contain transition-opacity duration-500 ease-in-out ${
-                                i === index ? "opacity-100" : "opacity-0"
-                            }`}
-                            draggable={false}
+                            src={media[index].src}
+                            alt={`${project.title} — fullscreen`}
+                            onClick={(e) => e.stopPropagation()}
+                            className="max-w-[95vw] max-h-[95vh] object-contain"
                         />
-                    )
-                ))}
+                    )}
 
-                {/* Prev/Next controls */}
-                {media.length > 1 && (
-                    <>
-                        <button onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full shadow-lg" aria-label="Previous">
-                            <ChevronLeft className="w-4 h-4" />
-                        </button>
-                        <button onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full shadow-lg" aria-label="Next">
-                            <ChevronRight className="w-4 h-4" />
-                        </button>
-                    </>
-                )}
-            </div>
-
-            {/* Thumbnails */}
-            {media.length > 1 && (
-                <div className="mt-3 flex gap-2 overflow-x-auto w-full">
-                    {media.map((item, i) => (
-                        <button
-                            key={i}
-                            onClick={(e) => { e.stopPropagation(); setIndex(i); }}
-                            className={`flex-none w-20 rounded overflow-hidden border inline-flex items-center justify-center ${i === index ? 'ring-2 ring-primary' : 'border-border/40'}`}
-                        >
-                            {item.type === 'video' ? (
-                                <video src={item.src} className="max-h-12 max-w-full object-contain" muted />
-                            ) : (
-                                <img src={item.src} alt={`${project.title} — thumbnail ${i + 1}`} className="max-h-12 max-w-full object-contain" />
-                            )}
-                        </button>
-                    ))}
-                </div>
+                    {/* Index indicator */}
+                    {media.length > 1 && (
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
+                            {index + 1} / {media.length}
+                        </div>
+                    )}
+                </div>,
+                document.body
             )}
-        </div>
+        </>
     );
 };
 

@@ -1,8 +1,8 @@
 import { Github, Linkedin, Facebook, Heart } from "lucide-react";
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Github, href: "https://github.com/rgmazon", label: "GitHub" },
+  { icon: Linkedin, href: "https://linkedin.com/in/rgmazon", label: "LinkedIn" },
   { icon: Facebook, href: "#", label: "Facebook" },
 ];
 
@@ -10,7 +10,7 @@ const footerLinks = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
   { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
+  { href: "#testimonials", label: "Testimonials" },
 ];
 
 export const Footer = () => {

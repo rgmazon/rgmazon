@@ -1,25 +1,25 @@
-import { Code2, Layout, ServerCog, ShieldCheck } from "lucide-react";
+import { ShieldCheck, Layout, Server, MonitorSmartphone } from "lucide-react";
 
 const highlights = [
     {
-        icon: Code2,
-        title: "Full-Stack Development",
-        description: "Building complete web solutions from interface to database."
-    },
-    {
         icon: Layout,
-        title: "Responsive Design",
-        description: "Skilled in creating mobile-first, responsive designs that adapt to various screen sizes."     
+        title: "Front-End Development",
+        description: "Designing and building intuitive, high-performance user interfaces with clean, maintainable code."
     },
     {
-        icon: ServerCog,
-        title: "Backend Integration",
-        description: "Experience in integrating front-end applications with robust backend services and APIs."  
+        icon: MonitorSmartphone,
+        title: "Responsive & Mobile-First Design",
+        description: "Creating mobile-first, responsive layouts that adapt seamlessly across devices and screen sizes."     
+    },
+    {
+        icon: Server,
+        title: "API & Backend Integration",
+        description: "Integrating front-end applications with RESTful APIs to deliver dynamic, data-driven user experiences."  
     },
     {
         icon: ShieldCheck,
-        title: "Web Security",
-        description: "Knowledgeable in implementing security best practices to protect web applications from vulnerabilities."
+        title: "Front-End Performance & Security Awareness",
+        description: "Applying best practices for performance optimization and front-end security to ensure fast, reliable, and secure applications."
     }
 ]
 
@@ -33,6 +33,7 @@ export const About = () => {
 
             {[...Array(30)].map((_, i) => (
                 <div 
+                    key={i}
                     className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
                     style={{
                         backgroundColor: "#5966cc",
@@ -88,7 +89,7 @@ export const About = () => {
                 {/* Right Column - Highlights */}
                 <div className="grid sm:grid-cols-2 gap-6">
                     {highlights.map((item, idx) => (
-                        <div key={idx} 
+                        <div key={item.title} 
                              className="glass p-6 rounded-2xl animate-fade-in" 
                              style={{ animationDelay: `${400 + idx * 100}ms` }}>
                             <div className="w-12 h-12 rounded-xl bg-0primary/10 flex items-center justify-center mb-4 hover:bg-primary/20">

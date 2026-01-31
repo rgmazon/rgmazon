@@ -64,6 +64,7 @@ export const Hero = () => {
 
             {[...Array(50)].map((_, i) => (
                 <div 
+                    key={i}
                     className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
                     style={{
                         backgroundColor: "#5966cc",
@@ -134,8 +135,8 @@ export const Hero = () => {
                         {[
                             { icon: Github, href: "https://github.com/rgmazon" },
                             { icon: Linkedin, href: "https://www.linkedin.com/in/rgmazon/" },
-                        ].map((social, idx) => (
-                            <a key={idx} href={social.href} className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300">
+                        ].map((social) => (
+                            <a key={social.href} href={social.href} className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300">
                                 {<social.icon className="w-5 h-5" />}
                             </a>
                         ))}
@@ -188,7 +189,7 @@ export const Hero = () => {
                 <div className="relative overflow-hidden">
                     <div className="flex animate-marquee">
                         {[...skills, ...skills].map((skill, idx) => (
-                            <div key={idx} className="flex-shrink-0 px-8 py-4">
+                            <div key={`skill-${idx}`} className="flex-shrink-0 px-8 py-4">
                                 <span className="text-xl font-semibold text-muted-foreground/50 hover:text-muted-foreground transition-colors">{skill}</span>
                             </div>
                         ))}
@@ -199,7 +200,7 @@ export const Hero = () => {
                 <div className="relative overflow-hidden mb-10">
                     <div className="flex animate-marquee-reverse">
                         {[...skillIcons, ...skillIcons, ...skillIcons].map((skill, idx) => (
-                            <div key={idx} className="flex-shrink-0 px-6 py-4">
+                            <div key={`skill-icon-${idx}`} className="flex-shrink-0 px-6 py-4">
                                 <img 
                                     src={skill.icon} 
                                     alt={skill.name} 

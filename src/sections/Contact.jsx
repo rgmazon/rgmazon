@@ -82,6 +82,7 @@ export const Contact = () => {
 
                 {[...Array(30)].map((_, i) => (
                     <div 
+                        key={i}
                         className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
                         style={{
                             backgroundColor: "#5966cc",
@@ -208,9 +209,9 @@ export const Contact = () => {
                                     Contact Information
                                 </h3>
                                 <div className="space-y-4">
-                                    {contactInfo.map((item, i) => (
+                                    {contactInfo.map((item) => (
                                     <a
-                                        key={i}
+                                        key={item.label}
                                         href={item.href}
                                         className="flex items-center gap-4 p-4 rounded-xl hover:bg-surface transition-colors group"
                                     >

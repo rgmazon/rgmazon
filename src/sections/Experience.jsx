@@ -13,7 +13,7 @@ const experiences = [
     role: "Full-Stack Developer, Web Administrator",
     company: "Blaseek",
     description:
-      "Built and maintained a responsive company website using Figma, PHP, and Bootstrap, significantly enhancing the brand's digital presence. You also optimized operations by automating client communications with PHPMailer and ensuring long-term site reliability through consistent security audits.",
+      "Built and maintained a responsive company website using Figma, PHP, and Bootstrap, significantly enhancing the brand's digital presence. Optimized operations by automating client communications with PHPMailer and ensuring long-term site reliability through consistent security audits.",
     technologies: ["TailwindCSS", "PHP", "PHPMailer", "JavaScript", "Figma"],
     current: false,
   },
@@ -47,6 +47,7 @@ export const Experience = () => {
 
                 {[...Array(30)].map((_, i) => (
                     <div 
+                        key={i}
                         className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
                         style={{
                             backgroundColor: "#5966cc",
@@ -91,7 +92,7 @@ export const Experience = () => {
                     <div className="space-y-12">
                         {experiences.map((exp, idx) => (
                             <div 
-                                key={idx} 
+                                key={`${exp.period}-${exp.company}`} 
                                 className="relative grid md:grid-cols-2 gap-8 animate-fade-in"
                                 style={{ animationDelay: `${(idx + 1) * 150}ms`}}
                             >
@@ -127,7 +128,7 @@ export const Experience = () => {
                                             <div className={`flex flex-wrap gap-2 mt-4 ${idx % 2 === 0 ? "md:justify-end" : "md:justify-start"}`}>
                                                 {exp.technologies.map((tech, techIdx) => (
                                                     <span 
-                                                        key={techIdx} 
+                                                        key={`${exp.company}-${tech}-${techIdx}`} 
                                                         className="px-3 py-1 bg-surface text-xs rounded-full text-muted-foreground"
                                                     >
                                                         {tech}
