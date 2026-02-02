@@ -10,7 +10,7 @@ const projects = [
     description: "A full-featured social networking platform built with PHP and MySQL, featuring user profiles, real-time interactions, and a responsive UI. Utilizes the Smarty template engine for clean separation of logic and design, and Docker for streamlined development and deployment.",
     image: "/assets/projects/fliqueySocial/fliquey.avif",
     // video: "/assets/projects/fliqueySocial/fliquey-video.webm",
-    tags: ["PHP", "MySQL", "JavaScript", "Bootstrap", "Smarty Template Engine", "Docker"],
+    tags: ["PHP", "MySQL", "JavaScript", "Bootstrap", "Smarty Template Engine", "Docker", "Mustache"],
     link: "https://social.fliquey.com/",
     github: "#",
     moreImages: [
@@ -90,6 +90,20 @@ const projects = [
       "/assets/projects/blaseek/blaseek-2.avif",
       "/assets/projects/blaseek/blaseek-3.avif"
     ]
+  },
+  {
+    title: "Image Converter",
+    description: "A web application that allows users to convert images between various formats (JPG, PNG, BMP, GIF) with ease. Built using React.js, TailwindCSS, Vite, and pnpm for the frontend and Node.js with Express, Sharp, REST API, and Archiver for the backend, and deployed on Cloudflare pages and Render.com.",
+    image: "/assets/projects/imageConverter/imageConverter.avif",
+    video: "/assets/projects/imageConverter/imageConverter-video.webm",
+    tags: ["React.js", "TailwindCSS", "Node.js", "Express", "Sharp", "REST API", "Vite", "pnpm", "Cloudflare Pages", "Render.com"],
+    link: "#",
+    github: "https://github.com/rgmazon/Image-Converter/",
+    moreImages: [
+      "/assets/projects/imageConverter/imageConverter-1.avif",
+      "/assets/projects/imageConverter/imageConverter-2.avif",
+      "/assets/projects/imageConverter/imageConverter-3.avif"
+    ]
   }
 ];
 
@@ -127,6 +141,10 @@ export const Projects = () => {
             {/* Bg glows */}
             <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
             <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/5 rounded-full blur-3xl" />
+
+
+
+
             <div className="container mx-auto px-6 relative z-10">
                 
                 {/* Section Header */}
