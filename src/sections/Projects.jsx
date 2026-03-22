@@ -175,8 +175,8 @@ const projects = [
       "Google Gemini",
       "Cloudflare Pages",
     ],
-    link: "#",
-    github: "#",
+    link: "https://grave-locator.pages.dev/",
+    github: "https://github.com/rgmazon/grave-locator",
     moreImages: [
       "/assets/projects/graveLocator/graveLocator-1.webp",
       "/assets/projects/graveLocator/graveLocator-2.webp",
