@@ -7,21 +7,31 @@ import ProjectModal from "../components/ProjectModal";
 const projects = [
   {
     title: "FLIQUEY Social",
-    description: "A full-featured social networking platform built with PHP and MySQL, featuring user profiles, real-time interactions, and a responsive UI. Utilizes the Smarty template engine for clean separation of logic and design, and Docker for streamlined development and deployment.",
+    description:
+      "A full-featured social networking platform built with PHP and MySQL, featuring user profiles, real-time interactions, and a responsive UI. Utilizes the Smarty template engine for clean separation of logic and design, and Docker for streamlined development and deployment.",
     image: "/assets/projects/fliqueySocial/fliquey.avif",
     // video: "/assets/projects/fliqueySocial/fliquey-video.webm",
-    tags: ["PHP", "MySQL", "JavaScript", "Bootstrap", "Smarty Template Engine", "Docker", "Mustache"],
+    tags: [
+      "PHP",
+      "MySQL",
+      "JavaScript",
+      "Bootstrap",
+      "Smarty Template Engine",
+      "Docker",
+      "Mustache",
+    ],
     link: "https://social.fliquey.com/",
     github: "#",
     moreImages: [
       "/assets/projects/fliqueySocial/fliquey-1.avif",
       "/assets/projects/fliqueySocial/fliquey-2.avif",
-      "/assets/projects/fliqueySocial/fliquey-3.avif"
-    ]
+      "/assets/projects/fliqueySocial/fliquey-3.avif",
+    ],
   },
   {
     title: "Applemax Stream",
-    description: "A media streaming web application developed using Laravel and MySQL, designed for performance and scalability. Includes a modern, responsive interface built with Bootstrap and dynamic features powered by JavaScript, all containerized with Docker for efficient deployment.",
+    description:
+      "A media streaming web application developed using Laravel and MySQL, designed for performance and scalability. Includes a modern, responsive interface built with Bootstrap and dynamic features powered by JavaScript, all containerized with Docker for efficient deployment.",
     image: "/assets/projects/applemaxStream/applemax-stream.avif",
     // video: "/assets/projects/applemaxStream/applemax-stream-video.webm",
     tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Docker", "JavaScript"],
@@ -30,12 +40,13 @@ const projects = [
     moreImages: [
       "/assets/projects/applemaxStream/applemax-stream-1.avif",
       "/assets/projects/applemaxStream/applemax-stream-2.avif",
-      "/assets/projects/applemaxStream/applemax-stream-3.avif"
-    ]
+      "/assets/projects/applemaxStream/applemax-stream-3.avif",
+    ],
   },
   {
     title: "FLIQUEY Landing Page",
-    description: "A conversion-focused landing page created to promote the FLIQUEY platform. Built with Bootstrap, PHP, and JavaScript to ensure fast loading, mobile responsiveness, and seamless user interaction.",
+    description:
+      "A conversion-focused landing page created to promote the FLIQUEY platform. Built with Bootstrap, PHP, and JavaScript to ensure fast loading, mobile responsiveness, and seamless user interaction.",
     image: "/assets/projects/fliqueyLanding/fliqueyLanding.avif",
     // video: "/assets/projects/fliqueyLanding/fliqueyLanding-video.webm",
     tags: ["Bootstrap", "PHP", "JavaScript"],
@@ -44,15 +55,25 @@ const projects = [
     moreImages: [
       "/assets/projects/fliqueyLanding/fliqueyLanding-1.avif",
       "/assets/projects/fliqueyLanding/fliqueyLanding-2.avif",
-      "/assets/projects/fliqueyLanding/fliqueyLanding-3.avif"
-    ]
+      "/assets/projects/fliqueyLanding/fliqueyLanding-3.avif",
+    ],
   },
   {
     title: "Professional Portfolio",
-    description: "A modern personal portfolio website built with React and TailwindCSS, showcasing projects and skills with a clean, responsive design. Deployed on Cloudflare Pages and integrated with EmailJS for direct contact functionality.",
+    description:
+      "A modern personal portfolio website built with React and TailwindCSS, showcasing projects and skills with a clean, responsive design. Deployed on Cloudflare Pages and integrated with EmailJS for direct contact functionality.",
     image: "/assets/projects/professionalPortfolio/professionalPortfolio.avif",
-    video: "/assets/projects/professionalPortfolio/professionalPortfolio-video.webm",
-    tags: ["React.js", "TailwindCSS", "JavaScript", "Cloudflare Pages", "EmailJS", "SEO", "Vite"],
+    video:
+      "/assets/projects/professionalPortfolio/professionalPortfolio-video.webm",
+    tags: [
+      "React.js",
+      "TailwindCSS",
+      "JavaScript",
+      "Cloudflare Pages",
+      "EmailJS",
+      "SEO",
+      "Vite",
+    ],
     link: "https://rgmazon.pages.dev/",
     github: "#",
     moreImages: [
@@ -60,12 +81,13 @@ const projects = [
       "/assets/projects/professionalPortfolio/professionalPortfolio-2.avif",
       "/assets/projects/professionalPortfolio/professionalPortfolio-3.avif",
       "/assets/projects/professionalPortfolio/professionalPortfolio-4.avif",
-      "/assets/projects/professionalPortfolio/professionalPortfolio-5.avif"
-    ]
+      "/assets/projects/professionalPortfolio/professionalPortfolio-5.avif",
+    ],
   },
   {
     title: "Consbeez Call Center Services Website",
-    description: "Designed, developed, deployed, and maintained the official website of Consbeez, delivering a fast, responsive, and user-focused web experience. Built with PHP, Bootstrap, and JavaScript, with PHPMailer integration for reliable client inquiries and email handling.",
+    description:
+      "Designed, developed, deployed, and maintained the official website of Consbeez, delivering a fast, responsive, and user-focused web experience. Built with PHP, Bootstrap, and JavaScript, with PHPMailer integration for reliable client inquiries and email handling.",
     image: "/assets/projects/consbeez/consbeez.avif",
     video: "/assets/projects/consbeez/consbeez-video.webm",
     tags: ["Bootstrap", "JavaScript", "PHP", "PHPMailer", "SEO"],
@@ -74,37 +96,95 @@ const projects = [
     moreImages: [
       "/assets/projects/consbeez/consbeez-1.avif",
       "/assets/projects/consbeez/consbeez-2.avif",
-      "/assets/projects/consbeez/consbeez-3.avif"
-    ]
+      "/assets/projects/consbeez/consbeez-3.avif",
+    ],
   },
-  {
-    title: "Blaseek Landing Page",
-    description: "A sleek and modern landing page for Blaseek, crafted with TailwindCSS and JavaScript to ensure a responsive design and engaging user experience. Focused on clear calls-to-action and optimized for conversions.",
-    image: "/assets/projects/blaseek/blaseek.avif",
-    video: "/assets/projects/blaseek/blaseek-video.webm",
-    tags: ["TailwindCSS", "JavaScript", "React.js", "EmailJS", "Vite", "SEO"],
-    link: "https://blaseek.com/",
-    github: "#",
-    moreImages: [
-      "/assets/projects/blaseek/blaseek-1.avif",
-      "/assets/projects/blaseek/blaseek-2.avif",
-      "/assets/projects/blaseek/blaseek-3.avif"
-    ]
-  },
+  //   {
+  //     title: "Blaseek Landing Page",
+  //     description: "A sleek and modern landing page for Blaseek, crafted with TailwindCSS and JavaScript to ensure a responsive design and engaging user experience. Focused on clear calls-to-action and optimized for conversions.",
+  //     image: "/assets/projects/blaseek/blaseek.avif",
+  //     video: "/assets/projects/blaseek/blaseek-video.webm",
+  //     tags: ["TailwindCSS", "JavaScript", "React.js", "EmailJS", "Vite", "SEO"],
+  //     link: "https://blaseek.com/",
+  //     github: "#",
+  //     moreImages: [
+  //       "/assets/projects/blaseek/blaseek-1.avif",
+  //       "/assets/projects/blaseek/blaseek-2.avif",
+  //       "/assets/projects/blaseek/blaseek-3.avif"
+  //     ]
+  //   },
   {
     title: "Image Converter",
-    description: "A web application that allows users to convert images between various formats (JPG, PNG, BMP, GIF) with ease. Built using React.js, TailwindCSS, Vite, and pnpm for the frontend and Node.js with Express, Sharp, REST API, and Archiver for the backend, and deployed on Cloudflare pages and Render.com.",
+    description:
+      "A web application that allows users to convert images between various formats (JPG, PNG, BMP, GIF) with ease. Built using React.js, TailwindCSS, Vite, and pnpm for the frontend and Node.js with Express, Sharp, REST API, and Archiver for the backend, and deployed on Cloudflare pages and Render.com.",
     image: "/assets/projects/imageConverter/imageConverter.avif",
     video: "/assets/projects/imageConverter/imageConverter-video.webm",
-    tags: ["React.js", "TailwindCSS", "Node.js", "Express", "Sharp", "REST API", "Vite", "pnpm", "Cloudflare Pages", "Render.com"],
+    tags: [
+      "React.js",
+      "TailwindCSS",
+      "Node.js",
+      "Express",
+      "Sharp",
+      "REST API",
+      "Vite",
+      "pnpm",
+      "Cloudflare Pages",
+      "Render.com",
+    ],
     link: "#",
     github: "https://github.com/rgmazon/Image-Converter/",
     moreImages: [
       "/assets/projects/imageConverter/imageConverter-1.avif",
       "/assets/projects/imageConverter/imageConverter-2.avif",
-      "/assets/projects/imageConverter/imageConverter-3.avif"
-    ]
-  }
+      "/assets/projects/imageConverter/imageConverter-3.avif",
+    ],
+  },
+  {
+    title: "Follo - Job Application Tracker",
+    description: `Follo is a personal job application tracker built for job seekers who want to stay on top of their pipeline. It lets you log every application, track its progress through the hiring stages, record recruiter details, and keep a timestamped activity log of every interaction — interviews, follow-ups, offers, and rejections — all in one place.
+                    The name comes from the core purpose: follow up on every opportunity you've put yourself forward for.`,
+    image: "/assets/projects/follo/follo-1.webp",
+    video: "/assets/projects/follo/follo-video.webm",
+    tags: [
+      "Next.js 15 (App Router)",
+      "TypeScript",
+      "TailwindCSS",
+      "Supabase + Supabase Auth + Supabase JS client",
+      "pnpm",
+      "Vercel",
+    ],
+    link: "https://follo-phi.vercel.app/",
+    github: "https://github.com/rgmazon/follo",
+    moreImages: [
+      "/assets/projects/follo/follo-1.webp",
+      "/assets/projects/follo/follo-2.webp",
+      "/assets/projects/follo/follo-3.webp",
+      "/assets/projects/follo/follo-4.webp",
+    ],
+  },
+  {
+    title: "Grave Locator",
+    description: "Leveraged Google Gemini to accelerate the development of a full-stack geospatial application built with React.js, Tailwind CSS, and Supabase. This AI-assisted workflow streamlined the integration of Mapbox for multi-view mapping and helped architect a secure system for users to search locations and contribute crowdsourced graveyard data, all deployed via Cloudflare Pages.",
+    image: "/assets/projects/graveLocator/graveLocator.webp",
+    video: "/assets/projects/graveLocator/graveLocator-video.webm",
+    tags: [
+      "React.js",
+      "TailwindCSS",
+      "Mapbox GL JS",
+      "Supabase",
+      "Google Gemini",
+      "Cloudflare Pages",
+    ],
+    link: "#",
+    github: "#",
+    moreImages: [
+      "/assets/projects/graveLocator/graveLocator-1.webp",
+      "/assets/projects/graveLocator/graveLocator-2.webp",
+      "/assets/projects/graveLocator/graveLocator-3.webp",
+      "/assets/projects/graveLocator/graveLocator-4.webp",
+      "/assets/projects/graveLocator/graveLocator-5.webp",
+    ],
+  },
 ];
 
 
