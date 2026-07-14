@@ -185,6 +185,29 @@ const projects = [
       "/assets/projects/graveLocator/graveLocator-5.webp",
     ],
   },
+  {
+    title: "HeroDex",
+    description: "A full-stack superhero encyclopedia where users search, compare, and save heroes from Marvel, DC, and more. Features radar charts for power stat visualization, token-based authentication, and a news feed. Built to strengthen Laravel API and React/TypeScript skills simultaneously.",
+    image: "/assets/projects/heroDex/HeroDex-Home.png",
+    video: "",
+    tags: [
+      "React",
+      "TypeScript",
+      "TailwindCSS",
+      "Laravel",
+      "Supabase",
+      "Docker",
+      "Chart JS",
+    ],
+    link: "https://herodex-vert.vercel.app/",
+    github: "https://github.com/rgmazon/herodex",
+    moreImages: [
+      "/assets/projects/heroDex/HeroDex-Login.png",
+      "/assets/projects/heroDex/HeroDex-Signup.png",
+      "/assets/projects/heroDex/HeroDex-Compare.png",
+      "/assets/projects/heroDex/HeroDex-Home-Mobile.webp",
+    ],
+  }
 ];
 
 

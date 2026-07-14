@@ -1,6 +1,6 @@
 const experiences = [
   {
-    period: "2025 — Present",
+    period: "2025 — 2026",
     role: "Full-Stack Developer",
     company: "Fliquey Entertainment",
     description:
@@ -9,7 +9,7 @@ const experiences = [
     current: true,
   },
   {
-    period: "2024 - 2025",
+    period: "2024 — 2025",
     role: "Full-Stack Developer, Web Administrator",
     company: "Blaseek",
     description:
@@ -24,6 +24,15 @@ const experiences = [
     description:
       "Collaborated in a team environment to build responsive user interfaces using Bootstrap and PHP. Restructured MySQL databases, significantly improving data retrieval efficiency for the development team.",
     technologies: ["JavaScript", "PHP", "Figma", "MySQL", "XAMPP", "Bootstrap"],
+    current: false,
+  },
+  {
+    period: "Jul 2023 — Oct 2023",
+    role: "Team Supervisor",
+    company: "Philippine Statistics Authority (PSA)",
+    description:
+      "Led a team of 7 in conducting data collection and analysis for the 2023 Community-Based Monitoring System (CBMS). Ensured accurate data entry, quality control, and timely reporting, contributing to the successful completion of the census project.",
+    technologies: ["Microsoft Excel", "Data Analysis", "Team Leadership"],
     current: false,
   },
   {
