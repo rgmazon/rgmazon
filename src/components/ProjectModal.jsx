@@ -14,10 +14,6 @@ const Carousel = ({ project }) => {
     const [fullscreen, setFullscreen] = useState(false);
 
     useEffect(() => {
-        setIndex(0);
-    }, [project]);
-
-    useEffect(() => {
         const onKey = (e) => {
             if (e.key === 'ArrowLeft') setIndex((i) => (i - 1 + media.length) % media.length);
             if (e.key === 'ArrowRight') setIndex((i) => (i + 1) % media.length);
@@ -246,7 +242,7 @@ const ProjectModal = ({ project, onClose }) => {
                 <div className="flex-1 overflow-auto p-4 space-y-4">
                         {/* Carousel: uses project.moreImages if present, otherwise shows project.image */}
                         <div className="w-full rounded-lg overflow-hidden relative" style={{aspectRatio: '16/9'}}>
-                            <Carousel project={project} />
+                            <Carousel key={project.title} project={project} />
                         </div>
 
                     <div>
@@ -262,7 +258,7 @@ const ProjectModal = ({ project, onClose }) => {
                     </div>
 
                     <div className="flex gap-3 pt-4">
-                        {project.link && (
+                        {project.link && project.link !== "#" && (
                             <a
                                 href={project.link}
                                 target="_blank"
@@ -273,7 +269,7 @@ const ProjectModal = ({ project, onClose }) => {
                                 <ArrowUpRight className="w-4 h-4" />
                             </a>
                         )}
-                        {project.github && (
+                        {project.github && project.github !== "#" && (
                             <a
                                 href={project.github}
                                 target="_blank"

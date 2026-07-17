@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowUpRight, Github } from "lucide-react";
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
 import ProjectModal from "../components/ProjectModal";
+import { BackgroundDots } from "../components/BackgroundDots";
 
 
 const projects = [
@@ -222,24 +223,7 @@ export const Projects = () => {
         <section className="py-32 relative overflow-hidden" id="projects">
 
             {/* Green Dots */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-
-
-                {[...Array(30)].map((_, i) => (
-                    <div 
-                        key={i}
-                        className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
-                        style={{
-                            backgroundColor: "#5966cc",
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                            animation: `slow-drift ${15 + Math.random() * 20}s ease-in-out infinite`,
-                            animationDelay: `${Math.random() * 5}s`,
-                        }}
-                    /> 
-                ))}
-
-            </div>
+            <BackgroundDots />
 
             {/* Bg glows */}
             <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -288,20 +272,28 @@ export const Projects = () => {
                                 />
                                 {/* Overlay Links */}
                                 <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <a
-                                        href={project.link}
-                                        onClick={(e) => e.stopPropagation()}
-                                        className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
-                                    >
-                                        <ArrowUpRight className="w-5 h-5" />
-                                    </a>
-                                    <a
-                                        href={project.github}
-                                        onClick={(e) => e.stopPropagation()}
-                                        className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
-                                    >
-                                        <Github className="w-5 h-5" />
-                                    </a>
+                                    {project.link && project.link !== "#" && (
+                                        <a
+                                            href={project.link}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            onClick={(e) => e.stopPropagation()}
+                                            className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
+                                        >
+                                            <ArrowUpRight className="w-5 h-5" />
+                                        </a>
+                                    )}
+                                    {project.github && project.github !== "#" && (
+                                        <a
+                                            href={project.github}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            onClick={(e) => e.stopPropagation()}
+                                            className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
+                                        >
+                                            <Github className="w-5 h-5" />
+                                        </a>
+                                    )}
                                 </div>
                             </div>
 

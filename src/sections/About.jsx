@@ -1,4 +1,5 @@
 import { ShieldCheck, Layout, Server, MonitorSmartphone } from "lucide-react";
+import { BackgroundDots } from "../components/BackgroundDots";
 
 const highlights = [
     {
@@ -28,24 +29,7 @@ export const About = () => {
     return <section className="py-32 relative overflow-hidden" id="about">
 
         {/* Green Dots */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-
-
-            {[...Array(30)].map((_, i) => (
-                <div 
-                    key={i}
-                    className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
-                    style={{
-                        backgroundColor: "#5966cc",
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                        animation: `slow-drift ${15 + Math.random() * 20}s ease-in-out infinite`,
-                        animationDelay: `${Math.random() * 5}s`,
-                    }}
-                /> 
-            ))}
-
-        </div>
+        <BackgroundDots />
 
         <div className="container mx-auto px-6 relative z-10">
             <div className="grid lg:grid-cols-2 gap-16 items-center">

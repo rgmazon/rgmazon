@@ -8,6 +8,7 @@ import {
   Download,
 } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
+import { BackgroundDots } from "@/components/BackgroundDots";
 
 const skills = [
     "JavaScript",
@@ -61,24 +62,7 @@ export const Hero = () => {
         </div>
 
         {/* Green Dots */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-
-
-            {[...Array(50)].map((_, i) => (
-                <div 
-                    key={i}
-                    className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
-                    style={{
-                        backgroundColor: "#5966cc",
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                        animation: `slow-drift ${15 + Math.random() * 20}s ease-in-out infinite`,
-                        animationDelay: `${Math.random() * 5}s`,
-                    }}
-                /> 
-            ))}
-
-        </div>
+        <BackgroundDots count={50} />
 
         {/* Content */ }
         <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">

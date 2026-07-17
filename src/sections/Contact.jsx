@@ -2,6 +2,7 @@ import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-reac
 import { Button } from "../components/Button";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { BackgroundDots } from "../components/BackgroundDots";
 
 const contactInfo = [
   {
@@ -66,7 +67,7 @@ export const Contact = () => {
 
         } catch (err) {
             console.error("Error sending email:", err);
-            setSubmitStatus({ type: "error", message: error.text || "Failed to send message. Please try again later." });
+            setSubmitStatus({ type: "error", message: err.text || "Failed to send message. Please try again later." });
         } finally {
             setIsLoading(false);
         }
@@ -77,24 +78,7 @@ export const Contact = () => {
         <section className="py-32 relative overflow-hidden" id="contact">
 
             {/* Green Dots */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-
-
-                {[...Array(30)].map((_, i) => (
-                    <div 
-                        key={i}
-                        className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
-                        style={{
-                            backgroundColor: "#5966cc",
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                            animation: `slow-drift ${15 + Math.random() * 20}s ease-in-out infinite`,
-                            animationDelay: `${Math.random() * 5}s`,
-                        }}
-                    /> 
-                ))}
-
-            </div>
+            <BackgroundDots />
 
             {/* Bg glows */}
             <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />

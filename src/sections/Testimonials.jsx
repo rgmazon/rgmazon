@@ -1,5 +1,6 @@
 import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { BackgroundDots } from "../components/BackgroundDots";
 
 const testimonials = [
   {
@@ -52,24 +53,7 @@ export const Testimonials = () => {
         <section className="py-32 relative overflow-hidden" id="testimonials">
 
             {/* Green Dots */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-
-
-                {[...Array(30)].map((_, i) => (
-                    <div 
-                        key={i}
-                        className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
-                        style={{
-                            backgroundColor: "#5966cc",
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                            animation: `slow-drift ${25 + Math.random() * 40}s ease-in-out infinite`,
-                            animationDelay: `${Math.random() * 5}s`,
-                        }}
-                    /> 
-                ))}
-
-            </div>
+            <BackgroundDots durationMin={25} durationRange={40} />
             {/* Blurred Circles */}
             <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
             <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/5 rounded-full blur-3xl" />

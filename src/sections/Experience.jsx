@@ -1,3 +1,5 @@
+import { BackgroundDots } from "../components/BackgroundDots";
+
 const experiences = [
   {
     period: "2025 — 2026",
@@ -51,24 +53,7 @@ export const Experience = () => {
         <section className="py-32 relative overflow-hidden" id="experience">
 
             {/* Green Dots */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-
-
-                {[...Array(30)].map((_, i) => (
-                    <div 
-                        key={i}
-                        className="absolute w-0.5 h-0.5 rounded-full opacity-60 animate-pulse"
-                        style={{
-                            backgroundColor: "#5966cc",
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                            animation: `slow-drift ${15 + Math.random() * 20}s ease-in-out infinite`,
-                            animationDelay: `${Math.random() * 5}s`,
-                        }}
-                    /> 
-                ))}
-
-            </div>
+            <BackgroundDots />
             {/* Blurred Circles */}
             <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
             <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/5 rounded-full blur-3xl" />
