@@ -26,7 +26,7 @@ export const Footer = () => {
               RG<span className="text-primary">.</span>
             </a>
             <p className="text-sm text-muted-foreground mt-2">
-              © {currentYear} RG Mazon. All rights reserved.
+              © {currentYear} Rudolfh Mazon. All rights reserved.
             </p>
           </div>
 

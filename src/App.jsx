@@ -4,6 +4,7 @@ import { About } from "@/sections/About";
 import { Experience } from "@/sections/Experience";
 import { Projects } from "@/sections/Projects";
 import { Testimonials } from "@/sections/Testimonials";
+import { FAQ } from "@/sections/FAQ";
 import { Contact } from "@/sections/Contact";
 import { Footer } from "@/layout/Footer";
 import { ThemeProvider } from "@/context/ThemeContext";
@@ -20,6 +21,7 @@ function App() {
           <Projects />
           <Experience />
           <Testimonials />
+          <FAQ />
           <Contact />
         </main>
         <Footer />  

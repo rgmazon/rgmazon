@@ -14,14 +14,14 @@ const contactInfo = [
   {
     icon: Phone,
     label: "Phone",
-    value: "+639 3913 91685",
-    href: ":+639391391685",
+    value: "+639 524 754587",
+    href: ":+639524754587",
   },
   {
     icon: MapPin,
     label: "Location",
     value: "Calapan City, PH",
-    href: "#",
+    href: "https://www.google.com/maps/search/?api=1&query=Calapan+City%2C+Oriental+Mindoro",
   },
 ];
 
@@ -99,16 +99,19 @@ export const Contact = () => {
                         </span>
                     </h2>
                     <p className="text-muted-foreground animate-fade-in animation-delay-200">
-                        Have a project in mind? I'd love to hear about it. Send me a message
-                        and let's discuss how we can work together.
+                        Have a website, web app, or product idea in mind? I’m available for freelance and collaboration work and would love to talk through your goals, timeline, and technical needs.
                     </p>
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
                     <div className="glass p-8 rounded-3xl border border-primary/30 animate-fade-in animation-delay-300">
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <h3 className="text-xl font-semibold mb-2">Send a message</h3>
+                        <p className="text-sm text-muted-foreground mb-6">
+                            Share your project goals and I’ll get back to you with next steps.
+                        </p>
+                        <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
                             <div>
-                                <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
+                                <label htmlFor="name" className="block text-sm font-medium mb-2">Your name</label>
                                 <input 
                                     id="name" 
                                     type="text" 
@@ -122,7 +125,7 @@ export const Contact = () => {
                                 />   
                             </div>
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+                                <label htmlFor="email" className="block text-sm font-medium mb-2">Email address</label>
                                 <input 
                                     id="email" 
                                     type="email" 
@@ -136,7 +139,7 @@ export const Contact = () => {
                                 />   
                             </div>
                             <div>
-                                <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
+                                <label htmlFor="message" className="block text-sm font-medium mb-2">Project details</label>
                                 <textarea 
                                     id="message" 
                                     required
@@ -192,11 +195,16 @@ export const Contact = () => {
                                 <h3 className="text-xl font-semibold mb-6">
                                     Contact Information
                                 </h3>
+                                <p className="text-sm text-muted-foreground mb-6">
+                                    Reach out for web development, UI implementation, Laravel or React work, or a technical consultation.
+                                </p>
                                 <div className="space-y-4">
                                     {contactInfo.map((item) => (
                                     <a
                                         key={item.label}
                                         href={item.href}
+                                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                                        rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                                         className="flex items-center gap-4 p-4 rounded-xl hover:bg-surface transition-colors group"
                                     >
                                         <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -220,9 +228,8 @@ export const Contact = () => {
                                 <span className="font-medium">Currently Available</span>
                             </div>
                             <p className="text-muted-foreground text-sm">
-                                I'm currently open to new opportunities and exciting projects.
-                                Whether you need a full-time engineer or a freelance consultant,
-                                let's talk!
+                                I’m currently open to new opportunities, freelance projects, and collaborative builds for modern websites and web applications.
+                                If you need a developer who can turn ideas into reliable digital experiences, let’s talk.
                             </p>
                         </div>
                     </div>

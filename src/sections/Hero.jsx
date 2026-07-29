@@ -73,25 +73,25 @@ export const Hero = () => {
                     <div className="animate-dfade-in">
                         <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary">
                             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                                RG Mazon · Full-Stack Developer
+                                Rudolfh Mazon · React, Laravel & PHP Web Developer
                         </span>
                     </div>
 
                     {/* Headline */}
                     <div className="space-y-4">
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in animation-delay-100">
-                            Turning <span className="text-primary glow-text">ideas</span> 
+                            Building <span className="text-primary glow-text">modern</span> 
                             <br />
-                            into high-impact
+                            websites and web apps
                             <br /> 
                             <span className="font-serif italic font-normal text-white">
-                                web experiences
+                                that deliver results
                             </span>
                         </h1>
 
                         <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">
-                            Hi, I'm RG Mazon — Turning ideas into interactive, high-performing web solutions is what I do best. 
-                            I design, develop, and deploy digital products that feel great to use and are built to scale.
+                            Hi, I'm Rudolfh Mazon — I create fast, responsive websites and web applications with React, Laravel, PHP, and Tailwind for clients who need polished digital experiences that are easy to use and built to last.
+                            Based in the Philippines, I focus on thoughtful design, reliable performance, and clear business value.
                         </p>
 
 
@@ -102,14 +102,14 @@ export const Hero = () => {
 
                         <a href="#contact">
                             <Button size="lg">
-                                Contact Me <ArrowRight className="w-5 h-5" />
+                                Let's Talk <ArrowRight className="w-5 h-5" />
                             </Button>
                         </a>
 
                         <a href="/assets/MazonRudolfh.pdf" download>
                             <AnimatedBorderButton>
                                 <Download className="w-5 h-5" />
-                                Download CV
+                                Download Resume
                             </AnimatedBorderButton>
                         </a>
 

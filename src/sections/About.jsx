@@ -40,27 +40,36 @@ export const About = () => {
                         <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase">About Me</span>
                     </div>
                     <h2 className="text-4xl md:text-5xl font-bold leading-tight animate-fade-in animation-delay-100 text-secondary-foreground">
-                        Turning ideas into
-                        <span className="font-serif italic font-normal text-white"> real-world digital solutions.</span>
+                        Building modern
+                        <span className="font-serif italic font-normal text-white"> websites and web apps that work beautifully.</span>
                     </h2>
                     <div className="space-y-4 text-muted-foreground animate-fade-in animation-delay-200">
                         <p>
-                            I’m a Full-Stack Developer with a background in Information Systems 
-                            and a passion for building web applications that are both functional and user-centered. 
-                            My journey started with a curiosity about how systems work behind the scenes — 
-                            and grew into a career focused on designing, developing, and deploying end-to-end digital experiences.
+                            I’m a web developer focused on creating fast, responsive websites and web applications for businesses, startups, and individuals who need reliable digital experiences.
+                            My work blends clean front-end implementation, thoughtful user experience, and practical back-end logic to deliver products that are both polished and dependable.
                         </p>
                         <p>
-                            I specialize in PHP, MySQL, and modern front-end tools like Bootstrap, Tailwind, and JavaScript, 
-                            creating everything from responsive company websites to custom web systems that streamline workflows and improve efficiency. 
-                            My approach blends clean code, thoughtful UI, and practical automation to deliver solutions that actually make an impact.
+                            I work with React, Laravel, PHP, Tailwind CSS, MySQL, and modern deployment tools to build everything from landing pages and company websites to larger web applications with real business value.
+                            My approach emphasizes maintainable code, strong performance, and clear communication throughout the process.
                         </p>
                         <p>
-                            When I’m not coding, I’m exploring new technologies, 
-                            refining my design skills in Figma, and continuously learning better ways to build smarter, 
-                            faster, and more scalable web products.
+                            I’m especially interested in projects that need a balance of design, functionality, and scalability, whether that means launching a new site, improving an existing product, or building a custom feature set from scratch.
                         </p>
             
+                    </div>
+
+                    <div className="glass rounded-2xl p-6 glow-border animate-fade-in animation-delay-300">
+                        <p className="text-sm uppercase tracking-[0.2em] text-primary font-medium mb-3">
+                            What I do
+                        </p>
+                        <h3 className="text-xl font-semibold mb-3 text-foreground">
+                            I build modern websites and web apps with React, Laravel, PHP, and Tailwind.
+                        </h3>
+                        <ul className="space-y-2 text-sm text-muted-foreground">
+                            <li>• Custom websites and landing pages for brands, startups, and teams</li>
+                            <li>• Full-stack web applications with polished front ends and reliable back ends</li>
+                            <li>• Performance-focused UI development with clean, maintainable code</li>
+                        </ul>
                     </div>
 
                     <div className="glass rounded-2xl p-6 glow-border animate-fade-in animation-delay-300">

@@ -9,7 +9,7 @@ const projects = [
   {
     title: "FLIQUEY Social",
     description:
-      "A full-featured social networking platform built with PHP and MySQL, featuring user profiles, real-time interactions, and a responsive UI. Utilizes the Smarty template engine for clean separation of logic and design, and Docker for streamlined development and deployment.",
+      "Built a social platform that gives users a place to create profiles, interact with content, and engage through a responsive experience. The work focused on clear product structure, maintainable architecture, and smooth deployment for a growing community product.",
     image: "/assets/projects/fliqueySocial/fliquey.avif",
     // video: "/assets/projects/fliqueySocial/fliquey-video.webm",
     tags: [
@@ -32,7 +32,7 @@ const projects = [
   {
     title: "Applemax Stream",
     description:
-      "A media streaming web application developed using Laravel and MySQL, designed for performance and scalability. Includes a modern, responsive interface built with Bootstrap and dynamic features powered by JavaScript, all containerized with Docker for efficient deployment.",
+      "Developed a streaming experience designed for scalable media consumption with a polished UI and reliable backend structure. The project emphasized performance, maintainability, and deployment readiness for a digital entertainment product.",
     image: "/assets/projects/applemaxStream/applemax-stream.avif",
     // video: "/assets/projects/applemaxStream/applemax-stream-video.webm",
     tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Docker", "JavaScript"],
@@ -47,7 +47,7 @@ const projects = [
   {
     title: "FLIQUEY Landing Page",
     description:
-      "A conversion-focused landing page created to promote the FLIQUEY platform. Built with Bootstrap, PHP, and JavaScript to ensure fast loading, mobile responsiveness, and seamless user interaction.",
+      "Created a conversion-focused landing experience to introduce FLIQUEY with clear messaging, responsive interactions, and fast-loading pages that strengthen first impressions and product awareness.",
     image: "/assets/projects/fliqueyLanding/fliqueyLanding.avif",
     // video: "/assets/projects/fliqueyLanding/fliqueyLanding-video.webm",
     tags: ["Bootstrap", "PHP", "JavaScript"],
@@ -62,7 +62,7 @@ const projects = [
   {
     title: "Professional Portfolio",
     description:
-      "A modern personal portfolio website built with React and TailwindCSS, showcasing projects and skills with a clean, responsive design. Deployed on Cloudflare Pages and integrated with EmailJS for direct contact functionality.",
+      "Built a personal portfolio that presents work clearly, improves contact conversion, and showcases technical expertise through a fast React-based experience optimized for usability and discoverability.",
     image: "/assets/projects/professionalPortfolio/professionalPortfolio.avif",
     video:
       "/assets/projects/professionalPortfolio/professionalPortfolio-video.webm",
@@ -88,7 +88,7 @@ const projects = [
   {
     title: "Consbeez Call Center Services Website",
     description:
-      "Designed, developed, deployed, and maintained the official website of Consbeez, delivering a fast, responsive, and user-focused web experience. Built with PHP, Bootstrap, and JavaScript, with PHPMailer integration for reliable client inquiries and email handling.",
+      "Delivered a polished company website for Consbeez that improved online presence, made services easier to understand, and supported client inquiries through reliable contact handling and a responsive experience.",
     image: "/assets/projects/consbeez/consbeez.avif",
     video: "/assets/projects/consbeez/consbeez-video.webm",
     tags: ["Bootstrap", "JavaScript", "PHP", "PHPMailer", "SEO"],
@@ -117,7 +117,7 @@ const projects = [
   {
     title: "Image Converter",
     description:
-      "A web application that allows users to convert images between various formats (JPG, PNG, BMP, GIF) with ease. Built using React.js, TailwindCSS, Vite, and pnpm for the frontend and Node.js with Express, Sharp, REST API, and Archiver for the backend, and deployed on Cloudflare pages and Render.com.",
+      "Built a practical image conversion tool that helps users quickly transform files between common formats while keeping the experience simple, responsive, and efficient.",
     image: "/assets/projects/imageConverter/imageConverter.avif",
     video: "/assets/projects/imageConverter/imageConverter-video.webm",
     tags: [
@@ -142,8 +142,7 @@ const projects = [
   },
   {
     title: "Follo - Job Application Tracker",
-    description: `Follo is a personal job application tracker built for job seekers who want to stay on top of their pipeline. It lets you log every application, track its progress through the hiring stages, record recruiter details, and keep a timestamped activity log of every interaction — interviews, follow-ups, offers, and rejections — all in one place.
-                    The name comes from the core purpose: follow up on every opportunity you've put yourself forward for.`,
+    description: `Created a job application tracker that helps users organize opportunities, monitor progress, and stay on top of follow-ups through a clear and structured workflow. The product is designed to reduce the stress of managing applications while keeping every interaction easy to review.`,
     image: "/assets/projects/follo/follo-1.webp",
     video: "/assets/projects/follo/follo-video.webm",
     tags: [
@@ -165,7 +164,7 @@ const projects = [
   },
   {
     title: "Grave Locator",
-    description: "Leveraged Google Gemini to accelerate the development of a full-stack geospatial application built with React.js, Tailwind CSS, and Supabase. This AI-assisted workflow streamlined the integration of Mapbox for multi-view mapping and helped architect a secure system for users to search locations and contribute crowdsourced graveyard data, all deployed via Cloudflare Pages.",
+    description: "Developed a geospatial application that helps users search and contribute location data through a map-driven experience. The project combined modern frontend tooling, secure data handling, and AI-assisted development to deliver a practical community-focused solution.",
     image: "/assets/projects/graveLocator/graveLocator.webp",
     video: "/assets/projects/graveLocator/graveLocator-video.webm",
     tags: [
@@ -188,7 +187,7 @@ const projects = [
   },
   {
     title: "HeroDex",
-    description: "A full-stack superhero encyclopedia where users search, compare, and save heroes from Marvel, DC, and more. Features radar charts for power stat visualization, token-based authentication, and a news feed. Built to strengthen Laravel API and React/TypeScript skills simultaneously.",
+    description: "Built a superhero encyclopedia that makes it easier to discover, compare, and save characters through interactive visuals and a polished experience. The project combined a modern frontend with API-backed features to create a more engaging discovery flow.",
     image: "/assets/projects/heroDex/HeroDex-Home.png",
     video: "",
     tags: [
@@ -240,14 +239,14 @@ export const Projects = () => {
                         Featured Work
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-secondary-foreground">
-                        Projects that 
+                        Projects built to
                         <span className="font-serif italic font-normal text-white">
                             {" "}
-                            make an impact.
+                            solve real problems.
                         </span>
                     </h2>
                     <p className="text-muted-foreground text-lg animate-fade-in animation-delay-200">
-                        A selection of projects showcasing my skills in web development, design, and problem-solving.
+                        A selection of projects focused on solving real problems with thoughtful design, modern tooling, and measurable impact.
                     </p>
                 </div>
 
