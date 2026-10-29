@@ -35,6 +35,8 @@ export const ThemeProvider = ({ children }) => {
     );
 };
 
+// shortcut: provider and hook share a file, so edits here full-reload instead of hot-reload; split into two files if that gets annoying
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => {
     const context = useContext(ThemeContext);
     if (!context) {
