@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* dev-only glass test page; keep its classes out of the production bundle */
+@source not "../dev";
 
 @theme {
   --color-background: #0e0d1a;
@@ -11,17 +13,68 @@
   --color-primary-foreground: #ffffff;
 
   --color-secondary: #1f2830;
-  --color-secondary-foreground: #5966cc;
+  --color-secondary-foreground: #8f99ea;
 
   --color-muted: #252e37;
-  --color-muted-foreground: #7a8491;
+  /* lightened so body text keeps 4.5:1 where the colour orbs sit behind it */
+  --color-muted-foreground: #a1abb8;
 
   --color-border: #242b32;
 
   --radius: 0.75rem;
+  /* concentric scale: inner radius = outer radius - padding */
+  --radius-card: 1.75rem;
+  --radius-chip: 0.75rem;
 
   --color-highlight: #f5a623;
-  --color-surface: #1a2329;
+  /* chip / input fill that sits on a matte .surface card; derived so it follows the theme */
+  --color-surface: color-mix(in srgb, var(--color-foreground) 10%, var(--color-background));
+}
+
+/* Matte content surfaces (layer 1) and Liquid Glass tokens (layer 2).
+   Derived from the theme colours above, so they follow dark/light automatically
+   except the glass values, which are tuned per theme below. */
+:root {
+  --surface-1: color-mix(in srgb, var(--color-foreground) 5%, var(--color-background));
+  --surface-2: color-mix(in srgb, var(--color-foreground) 10%, var(--color-background));
+  --hairline: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+
+  --glass-tint: #ffffff;
+  --glass-blur: 18px;
+  --glass-saturate: 170%;
+  --glass-regular-fill: 12%;
+  /* clear sits over media, so it carries a light scrim for text legibility */
+  --glass-clear-tint: #000000;
+  --glass-clear-fill: 22%;
+  --glass-rim: rgb(255 255 255 / 0.38);
+  --glass-rim-low: rgb(0 0 0 / 0.18);
+  --glass-shadow: 0 10px 30px rgb(0 0 0 / 0.3);
+  /* pointer highlight strength: kept low because muted nav text has little contrast headroom on dark glass */
+  --glass-light: rgb(255 255 255 / 0.07);
+  --glass-spec: rgb(255 255 255 / 0.85);
+  --glass-spec-low: rgb(255 255 255 / 0.5);
+
+  /* layer 0: colour the glass has to refract (see Backdrop.jsx) */
+  --orb-1: #5966cc;
+  --orb-2: #a855f7;
+  --orb-3: #0ea5e9;
+  --orb-opacity: 0.32;
+}
+
+:root.light {
+  --orb-1: #8f99f0;
+  --orb-2: #f5b5d5;
+  --orb-3: #9bdcfa;
+  --orb-opacity: 0.4;
+
+  --glass-regular-fill: 42%;
+  --glass-clear-tint: #ffffff;
+  --glass-rim: rgb(255 255 255 / 0.8);
+  --glass-rim-low: rgb(26 26 46 / 0.1);
+  --glass-shadow: 0 10px 30px rgb(26 26 46 / 0.14);
+  --glass-light: rgb(255 255 255 / 0.35);
+  --glass-spec: rgb(255 255 255 / 1);
+  --glass-spec-low: rgb(255 255 255 / 0.75);
 }
 
 /* Light mode overrides */
@@ -35,25 +88,36 @@
   --color-primary-foreground: #ffffff;
 
   --color-secondary: #c8c8dc;
-  --color-secondary-foreground: #5966cc;
+  --color-secondary-foreground: #343f9c;
 
   --color-muted: #c0c0d4;
-  --color-muted-foreground: #4a4a60;
+  --color-muted-foreground: #404058;
 
   --color-border: #b0b0c8;
 
   --color-highlight: #f5a623;
-  --color-surface: #b8b8d0;
 }
 
 @layer base {
   html {
+    /* keeps the viewport width fixed when the modal locks scrolling (a changing viewport aborts view transitions) */
+    scrollbar-gutter: stable;
     scroll-behavior: smooth;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   button {
     cursor: pointer;
+  }
+
+  /* visible keyboard focus everywhere; components that style their own ring (outline-none) win */
+  :where(a, button, summary, [role="button"], input, textarea, select):focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .glass-prominent:focus-visible {
+    outline-color: var(--color-foreground);
   }
 
   body {
@@ -70,21 +134,6 @@
     color: #1a1a2e;
   }
 
-  :root.light .glass,
-  :root.light .glass-strong {
-    background-color: rgba(224, 224, 236, 0.8);
-    border-color: rgba(176, 176, 200, 0.6);
-  }
-
-  :root.light .text-white {
-    color: #1a1a2e;
-  }
-
-  :root.light footer {
-    background-color: #b8b8d4;
-    border-top-color: #9090b8;
-  }
-
   :root.light input::placeholder,
   :root.light textarea::placeholder {
     color: #9090a8;
@@ -99,28 +148,201 @@
 }
 
 @layer components {
-  .glass {
-    background-color: color-mix(in srgb, var(--color-surface) 50%, transparent);
-    backdrop-filter: blur(16px);
-    border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+  /* Liquid Glass (layer 2: navigation and controls only). Approximation of Apple's material in CSS.
+     Never nest glass inside glass: a child backdrop-filter only sees its parent's pixels. */
+  .glass-regular,
+  .glass-clear,
+  .glass-prominent {
+    --glass-fill: var(--glass-regular-fill);
+    --glass-solid: var(--surface-2);
+    background: color-mix(in srgb, var(--glass-tint) var(--glass-fill), transparent);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    box-shadow:
+      inset 0 1px 0 var(--glass-rim),
+      inset 0 -1px 0 var(--glass-rim-low),
+      var(--glass-shadow);
   }
 
-  .glass-strong {
-    background-color: color-mix(in srgb, #5966cc 8%, color-mix(in srgb, var(--color-surface) 50%, transparent));
-    backdrop-filter: blur(16px);
-    border: 1px solid color-mix(in srgb, #5966cc 15%, color-mix(in srgb, var(--color-border) 50%, transparent));
+  /* no drop shadow (keeps the rim highlights); used by the header controls */
+  .glass-flat {
+    --glass-shadow: 0 0 transparent;
+  }
+
+  /* over media (hero photo, modal gallery): lighter so the content stays visible */
+  .glass-clear {
+    --glass-tint: var(--glass-clear-tint);
+    --glass-fill: var(--glass-clear-fill);
+    --glass-blur: 10px;
+  }
+
+  /* Adaptive tone: glass can't be legible over every backdrop with one static look, so a surface sitting
+     over bright content opts into the light look (and vice versa). Phase 3 sets this from the section
+     behind the navbar; until then it is set by hand. */
+  .glass-regular[data-tone="light"],
+  .glass-clear[data-tone="light"] {
+    --glass-regular-fill: 42%;
+    --glass-clear-tint: #ffffff;
+    --glass-rim: rgb(255 255 255 / 0.8);
+    --glass-rim-low: rgb(26 26 46 / 0.1);
+    --glass-shadow: 0 10px 30px rgb(26 26 46 / 0.14);
+    --glass-solid: #e8e8f2;
+    color: #1a1a2e;
+  }
+
+  .glass-regular[data-tone="dark"],
+  .glass-clear[data-tone="dark"] {
+    --glass-regular-fill: 12%;
+    /* the media-control look: a firm dark scrim so icons stay legible over any image or video */
+    --glass-clear-tint: #000000;
+    --glass-clear-fill: 50%;
+    --glass-rim: rgb(255 255 255 / 0.38);
+    --glass-rim-low: rgb(0 0 0 / 0.18);
+    --glass-shadow: 0 10px 30px rgb(0 0 0 / 0.3);
+    --glass-light: rgb(255 255 255 / 0.12);
+    --glass-solid: #1f1f33;
+    color: #f0f2f5;
+  }
+
+  /* the one brand-tinted control per view (primary CTA) */
+  .glass-prominent {
+    /* slightly darkened brand colour so white text holds 4.5:1 even over bright backdrops */
+    --glass-tint: color-mix(in srgb, var(--color-primary) 88%, black);
+    --glass-fill: 90%;
+    --glass-solid: var(--glass-tint);
+    --glass-light: rgb(255 255 255 / 0.05);
+    color: var(--color-primary-foreground);
+  }
+
+  /* Pointer-lit specular (Phase 6, optional): a soft highlight follows the cursor across the glass.
+     glassLight.js feeds --mx/--my. Skipped without hover or under reduced motion. Remove this block
+     and the script to drop the effect; nothing else depends on it. */
+  .glass-regular,
+  .glass-clear,
+  .glass-prominent {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .glass-regular::before,
+  .glass-clear::before,
+  .glass-prominent::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(circle 110px at var(--mx, 50%) var(--my, 0%), var(--glass-light), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  /* Specular edge: a 1.5px ring that catches light at the top-left and bottom-right, like the bevel of
+     thick glass. Pure CSS, so it works in every browser; the ring is cut out of a full-size box with a mask. */
+  .glass-regular::after,
+  .glass-clear::after,
+  .glass-prominent::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    pointer-events: none;
+    background: linear-gradient(135deg, var(--glass-spec) 0%, transparent 28%, transparent 62%, var(--glass-spec-low) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  }
+
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .glass-regular:hover::before,
+    .glass-clear:hover::before,
+    .glass-prominent:hover::before {
+      opacity: 1;
+    }
+  }
+
+  /* Interactive glass (as UIGlassEffect's `interactive`): controls lean toward the pointer and compress while
+     pressed. Opt-in by element: links, buttons and anything marked `glass-live`; static badges stay still.
+     Uses `transform` because Tailwind positions with the separate translate/scale properties, so the two
+     compose. Override per element with --lean (px) and --press (scale; 1 where the element already has its own). */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :is(a, button, .glass-live):is(.glass-regular, .glass-clear, .glass-prominent):hover {
+      transform: translate(calc(var(--lx, 0) * var(--lean, 3px)), calc(var(--ly, 0) * var(--lean, 3px)));
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :is(a, button, .glass-live):is(.glass-regular, .glass-clear, .glass-prominent):active {
+      transform: translate(calc(var(--lx, 0) * var(--lean, 3px)), calc(var(--ly, 0) * var(--lean, 3px))) scale(var(--press, 0.96));
+    }
+  }
+
+  /* Fallbacks: opaque fill, no blur. prefers-reduced-transparency support varies by browser,
+     so prefers-contrast and a missing backdrop-filter get the same treatment. */
+  @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+    .glass-regular,
+    .glass-clear,
+    .glass-prominent {
+      background: var(--glass-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    .glass-regular,
+    .glass-clear,
+    .glass-prominent {
+      box-shadow: inset 0 0 0 2px var(--color-foreground);
+    }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass-regular,
+    .glass-clear,
+    .glass-prominent {
+      background: var(--glass-solid);
+    }
+  }
+
+  /* colour orb (layer 0). Radial gradient instead of filter: blur, and transform-only animation,
+     so it stays cheap. Position, colour and drift come from inline custom properties. */
+  .orb {
+    position: absolute;
+    width: 62vmax;
+    height: 62vmax;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, var(--orb-color), transparent);
+    opacity: var(--orb-opacity);
+    will-change: transform;
+    animation: orb-drift var(--orb-dur, 60s) ease-in-out infinite alternate;
+  }
+
+  /* Refraction (Phase 6, optional, Chromium desktop only): the backdrop bends near the glass edge via an
+     SVG displacement map, with less blur so the bend stays visible. Opt-in per element with the
+     `refract` class (SVG backdrop filters are the costliest effect here, so only the navbar capsule).
+     lib/refraction.js sets the flag. Excluded wherever the opaque fallbacks above apply.
+     Remove with GlassDefs.jsx to drop the effect. */
+  @media (hover: hover) and (pointer: fine) and (not (prefers-reduced-transparency: reduce)) and (not (prefers-contrast: more)) {
+    :root[data-refract] .glass-regular.refract {
+      --glass-blur: 3px;
+      backdrop-filter: url(#glass-refract) blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(1.08);
+    }
+  }
+
+  /* matte content card (layer 1): no blur, so glass above it stays the focal layer */
+  .surface {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-card);
+    box-shadow: 0 8px 24px -12px rgb(0 0 0 / 0.25);
   }
 
   .glow-text {
     text-shadow: 0 0 30px
     color-mix(in srgb, var(--color-primary) 50%, transparent);
-  }
-
-  .glow-border {
-    box-shadow: 0 0 20px
-    color-mix(in srgb, var(--color-primary) 20%, transparent), 
-    inset 0 0 20px color-mix(in srgb, var(--color-primary) 5%, transparent);
-
   }
 
 
@@ -138,24 +360,6 @@
       transform: translateY(0);
       filter: blur(0);
     } 
-  }
-
-  @keyframes slow-drift {
-    0%, 100% {
-      transform: translate(0, 0);
-    }
-    25% {
-      transform: translate(20px, -30px);
-    }
-    50% {
-      transform: translate(-15px, -20px);
-    }
-    75% {
-      transform: translate(30px, 10px);
-    }
-    100% {
-      transform: translate(30px, 10px);
-    }
   }
 
   @keyframes float {
@@ -237,18 +441,53 @@
     animation: animated-border 1.5s linear infinite;
   }
 
-  .animated-border:hover {
-    background-color: color-mix(in srgb, #26c4b8 15%, transparent);
-    backdrop-filter: blur(16px);
-    box-shadow: 0 0 20px color-mix(in srgb, #26c4b8 20%, transparent);
-  }
-
   .timeline-glow {
     box-shadow: 0 0 40px
         color-mix(in srgb, var(--color-primary) 35%, transparent),
       0 0 80px color-mix(in srgb, var(--color-primary) 25%, transparent);
   }
 
+}
+
+/* Card image <-> modal gallery morph (Phase 6, optional; see lib/viewTransition.js) */
+::view-transition-group(project-hero) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: clip;
+  border-radius: 0.5rem;
+}
+
+/* Reduced motion: stop decorative loops and drop movement from entrances; keep a plain fade. */
+@keyframes orb-drift {
+  to {
+    transform: translate3d(var(--dx, 0), var(--dy, 0), 0);
+  }
+}
+
+@keyframes fade-only {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-float,
+  .animate-pulse,
+  .animate-ping,
+  .animate-bounce,
+  .animated-border-path,
+  .orb {
+    animation: none !important;
+  }
+
+  .animate-fade-in {
+    animation-name: fade-only;
+  }
 }
 
 /* Hide scrollbars when modal is open (cross-browser) */

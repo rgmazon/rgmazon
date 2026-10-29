@@ -1,6 +1,7 @@
 export const Button = ({ className = "", size = "default", children, ...prop }) => {
 
-    const baseClasses = "relative overflow-hidden rounded-full font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25";
+    // Brand-tinted glass: the one prominent control per view. Keyboard focus uses the global outline.
+    const baseClasses = "relative inline-block [--press:1] text-center overflow-hidden rounded-full font-medium glass-prominent transition-transform motion-safe:hover:scale-105 motion-safe:active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed";
 
     const sizeClasses = {
         sm: "px-4 py-2 text-sm",
@@ -10,11 +11,14 @@ export const Button = ({ className = "", size = "default", children, ...prop }) 
 
     const classes = `${baseClasses} ${sizeClasses[size]} ${className}`;
 
+    // Renders a link when given an href, so we never nest a button inside an anchor.
+    const Tag = prop.href ? "a" : "button";
+
     return (
-        <button className={classes} {...prop}>
+        <Tag className={classes} {...prop}>
             <span className="relative flex items-center justify-center gap-2">
                 {children}
             </span>
-        </button>
+        </Tag>
     );
 };

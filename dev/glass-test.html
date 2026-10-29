@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Glass test page (dev only)</title>
+  <style>
+    /* page-local layout only; the glass/surface classes come from src/index.css */
+    body { margin: 0; padding: 24px; }
+    .tp-wrap { max-width: 1100px; margin: 0 auto; display: grid; gap: 28px; }
+    .tp-bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .tp-stage {
+      position: relative; padding: 40px; border-radius: 28px; overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, #ff7a59 0, transparent 38%),
+        radial-gradient(circle at 85% 30%, #36c5f0 0, transparent 40%),
+        radial-gradient(circle at 50% 90%, #8b5cf6 0, transparent 45%),
+        url("/assets/hero-image.jpg") center / cover;
+    }
+    .tp-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    /* no colour rules here: unlayered page CSS would beat the layered glass tiers (Tailwind's reset already inherits) */
+    .tp-pill { padding: 12px 22px; border-radius: 999px; font: 500 15px system-ui; border: 0; }
+    .tp-cap { padding: 8px; border-radius: 999px; display: inline-flex; gap: 4px; }
+    .tp-cap a { padding: 8px 16px; border-radius: 999px; text-decoration: none; font: 500 14px system-ui; }
+    .tp-card { padding: 24px; }
+    .tp-label { font: 600 12px system-ui; letter-spacing: .08em; text-transform: uppercase; opacity: .7; margin: 0 0 12px; }
+    .tp-strips { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 20px; overflow: hidden; }
+    .tp-strip { padding: 28px; display: grid; place-items: center; min-height: 120px; }
+    .tp-strip.white { background: #fff; }
+    .tp-strip.black { background: #000; }
+    .tp-strip.red { background: #ff3b30; }
+    .tp-strip.sky { background: #7dd3fc; }
+    .tp-box { padding: 14px 22px; border-radius: 20px; font: 500 16px system-ui; }
+    .tp-status { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; font: 14px system-ui; }
+    .tp-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #22c55e; margin-right: 8px; }
+    @media (max-width: 640px) { .tp-strips { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="tp-wrap">
+    <div class="tp-bar">
+      <h1 style="margin:0;font:700 22px system-ui">Liquid Glass primitive: test page</h1>
+      <div class="tp-row">
+        <button id="theme" class="tp-pill glass-regular" type="button">Toggle light / dark</button>
+      </div>
+    </div>
+
+    <section class="tp-stage" aria-label="Three tiers over a colourful backdrop">
+      <p class="tp-label" style="color:#fff;text-shadow:0 1px 3px #0008">1. Three tiers (colourful backdrop)</p>
+      <div class="tp-row" style="margin-bottom:24px">
+        <button class="tp-pill glass-regular" type="button">.glass-regular</button>
+        <button class="tp-pill glass-clear" type="button">.glass-clear</button>
+        <button class="tp-pill glass-prominent" type="button">.glass-prominent</button>
+      </div>
+      <nav class="tp-cap glass-regular" aria-label="Sample capsule nav">
+        <a href="#a">About</a><a href="#b">Projects</a><a href="#c">Experience</a><a href="#d">Contact</a>
+      </nav>
+    </section>
+
+    <section class="surface tp-card" aria-label="Matte surface">
+      <p class="tp-label">2. Matte content card (.surface): no blur, sits below the glass layer</p>
+      <p style="margin:0">Content lives here. Radius and hairline come from the tokens; there is no <code>backdrop-filter</code>.</p>
+    </section>
+
+    <section aria-label="Worst-case legibility">
+      <p class="tp-label">3. Worst-case legibility: glass text over bright and dark backdrops</p>
+      <div class="tp-strips">
+        <div class="tp-strip white"><div class="tp-box glass-regular" data-probe="regular-on-white-untoned">regular on white, no data-tone (illegible in dark theme by design)</div></div>
+        <div class="tp-strip white"><div class="tp-box glass-regular" data-tone="light" data-probe="regular-on-white-toned">regular on white, data-tone="light"</div></div>
+        <div class="tp-strip black"><div class="tp-box glass-regular" data-tone="dark" data-probe="regular-on-black">regular on black, data-tone="dark"</div></div>
+        <div class="tp-strip red"><div class="tp-box glass-clear" data-probe="clear-on-red">clear on red</div></div>
+        <div class="tp-strip sky"><div class="tp-box glass-prominent" data-probe="prominent-on-sky">prominent on sky</div></div>
+      </div>
+    </section>
+
+    <section class="surface tp-card" aria-label="Fallback status">
+      <p class="tp-label">4. Fallback status (live)</p>
+      <ul class="tp-status" id="status"></ul>
+      <p style="margin:16px 0 8px">Motion check (stops under reduced motion):</p>
+      <div class="tp-row">
+        <span><span class="tp-dot animate-pulse"></span>pulse</span>
+        <span class="tp-pill glass-regular animate-float">float</span>
+      </div>
+      <p style="margin:16px 0 0;font-size:14px;opacity:.8">
+        Try it in Chrome DevTools: Rendering panel, emulate <em>prefers-reduced-motion</em>, <em>prefers-contrast</em>
+        and <em>prefers-reduced-transparency</em> (where offered). Tab through the controls to see the focus ring.
+      </p>
+    </section>
+  </div>
+
+  <script type="module">
+    import "/src/index.css";
+
+    const root = document.documentElement;
+    const saved = localStorage.getItem("theme");
+    root.classList.toggle("light", saved ? saved === "light" : matchMedia("(prefers-color-scheme: light)").matches);
+    document.getElementById("theme").addEventListener("click", () => {
+      const light = root.classList.toggle("light");
+      localStorage.setItem("theme", light ? "light" : "dark");
+    });
+
+    const checks = {
+      "prefers-reduced-motion: reduce": matchMedia("(prefers-reduced-motion: reduce)").matches,
+      "prefers-contrast: more": matchMedia("(prefers-contrast: more)").matches,
+      "prefers-reduced-transparency: reduce": matchMedia("(prefers-reduced-transparency: reduce)").matches,
+      "backdrop-filter supported": CSS.supports("backdrop-filter", "blur(1px)") || CSS.supports("-webkit-backdrop-filter", "blur(1px)"),
+    };
+    document.getElementById("status").innerHTML = Object.entries(checks)
+      .map(([k, v]) => `<li><strong>${v ? "ON " : "off"}</strong> ${k}</li>`).join("");
+  </script>
+</body>
+</html>

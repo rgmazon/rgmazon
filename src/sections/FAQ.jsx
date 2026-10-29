@@ -41,7 +41,7 @@ export const FAQ = () => {
           {faqs.map((item) => (
             <details
               key={item.question}
-              className="group glass rounded-2xl border border-primary/20 p-6"
+              className="group surface p-6"
             >
               <summary className="cursor-pointer list-none font-semibold text-foreground flex items-center justify-between gap-4">
                 <span>{item.question}</span>

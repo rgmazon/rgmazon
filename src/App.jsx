@@ -1,3 +1,5 @@
+import { Backdrop } from "@/components/Backdrop";
+import { GlassDefs } from "@/components/GlassDefs";
 import { Navbar } from "@/layout/Navbar";
 import { Hero } from "@/sections/Hero";
 import { About } from "@/sections/About";
@@ -14,8 +16,10 @@ function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen overflow-x-hidden">
+        <Backdrop />
+        <GlassDefs />
         <Navbar />
-        <main>
+        <main id="main">
           <Hero />
           <About />
           <Projects />

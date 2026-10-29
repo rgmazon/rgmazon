@@ -1,6 +1,5 @@
 import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { BackgroundDots } from "../components/BackgroundDots";
 
 const testimonials = [
   {
@@ -52,12 +51,6 @@ export const Testimonials = () => {
     return (
         <section className="py-32 relative overflow-hidden" id="testimonials">
 
-            {/* Green Dots */}
-            <BackgroundDots durationMin={25} durationRange={40} />
-            {/* Blurred Circles */}
-            <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/5 rounded-full blur-3xl" />
-
             <div className="container mx-auto px-6 relative z-10">
 
                 {/* Section Header */}
@@ -67,7 +60,7 @@ export const Testimonials = () => {
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-secondary-foreground">
                         Kind words from{" "}
-                        <span className="font-serif italic font-normal text-white">
+                        <span className="font-serif italic font-normal text-foreground">
                             amazing people.
                         </span>
                     </h2>
@@ -77,7 +70,7 @@ export const Testimonials = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="relative">
                         {/* Main Testimonial */}
-                        <div className="glass p-8 rounded-3xl md:p-12 glow-border animate-fade-in animation-delay-200">
+                        <div className="surface p-8 md:p-12 animate-fade-in animation-delay-200">
                             <div className="absolute -top-4 left-8 w-12 h-12 rounded-full bg-primary flex items-center justify-center" >
                                 <Quote className="w-6 h-6 text-primary-foreground" />   
                             </div>
@@ -103,7 +96,8 @@ export const Testimonials = () => {
                         {/* Testimonial Navigation */}
                         <div className="flex items-center justify-center gap-4 mt-8">
                             <button 
-                                className="p-3 rounded-full glass hover:bg-primary transition-all" 
+                                className="size-11 grid place-items-center rounded-full glass-regular transition-transform motion-safe:hover:scale-105"
+                                aria-label="Previous testimonial"
                                 onClick={previous}
                             >
                                 <ChevronLeft /> 
@@ -113,12 +107,14 @@ export const Testimonials = () => {
                                 {testimonials.map((_, idx) => (
                                     <button
                                         key={idx}
-                                        onClick={() => setActiveIdx(idx)} 
+                                        onClick={() => setActiveIdx(idx)}
+                                        aria-label={`Show testimonial ${idx + 1}`}
+                                        aria-current={idx === activeIdx || undefined}
                                         className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === activeIdx ? "w-8 bg-primary" : "bg-muted-foreground/30 hover:bg-muted-foreground/50"}`} 
                                     />
                                 ))}
                             </div>
-                            <button className="p-3 rounded-full glass hover:bg-primary transition-all" onClick={next}>
+                            <button className="size-11 grid place-items-center rounded-full glass-regular transition-transform motion-safe:hover:scale-105" aria-label="Next testimonial" onClick={next}>
                                 <ChevronRight />
                             </button>
                         </div>

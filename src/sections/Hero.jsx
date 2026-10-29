@@ -8,7 +8,6 @@ import {
   Download,
 } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
-import { BackgroundDots } from "@/components/BackgroundDots";
 
 const skills = [
     "JavaScript",
@@ -61,17 +60,14 @@ export const Hero = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" />
         </div>
 
-        {/* Green Dots */}
-        <BackgroundDots count={50} />
-
         {/* Content */ }
         <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
 
                 {/* Left Column - Text Content */}
                 <div className="space-y-8">
-                    <div className="animate-dfade-in">
-                        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary">
+                    <div className="animate-fade-in">
+                        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-border/50 text-sm text-secondary-foreground">
                             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                                 Rudolfh Mazon · React, Laravel & PHP Web Developer
                         </span>
@@ -84,7 +80,7 @@ export const Hero = () => {
                             <br />
                             websites and web apps
                             <br /> 
-                            <span className="font-serif italic font-normal text-white">
+                            <span className="font-serif italic font-normal text-foreground">
                                 that deliver results
                             </span>
                         </h1>
@@ -100,18 +96,14 @@ export const Hero = () => {
                     {/* Call to Action Buttons */}
                     <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
 
-                        <a href="#contact">
-                            <Button size="lg">
-                                Let's Talk <ArrowRight className="w-5 h-5" />
-                            </Button>
-                        </a>
+                        <Button size="lg" href="#contact">
+                            Let's Talk <ArrowRight className="w-5 h-5" />
+                        </Button>
 
-                        <a href="/assets/MazonRudolfh.pdf" download>
-                            <AnimatedBorderButton>
-                                <Download className="w-5 h-5" />
-                                Download Resume
-                            </AnimatedBorderButton>
-                        </a>
+                        <AnimatedBorderButton href="/assets/MazonRudolfh.pdf" download>
+                            <Download className="w-5 h-5" />
+                            Download Resume
+                        </AnimatedBorderButton>
 
                     </div>
 
@@ -119,10 +111,10 @@ export const Hero = () => {
                     <div className="flex items-center gap-4 animate-fade-in animation-delay-400">
                         <span className="text-sm text-muted-foreground">Follow: </span>
                         {[
-                            { icon: Github, href: "https://github.com/rgmazon" },
-                            { icon: Linkedin, href: "https://www.linkedin.com/in/rgmazon/" },
+                            { icon: Github, href: "https://github.com/rgmazon", label: "GitHub" },
+                            { icon: Linkedin, href: "https://www.linkedin.com/in/rgmazon/", label: "LinkedIn" },
                         ].map((social) => (
-                            <a key={social.href} href={social.href} className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300">
+                            <a key={social.href} href={social.href} aria-label={social.label} className="size-11 grid place-items-center rounded-full glass-regular hover:text-primary transition-transform motion-safe:hover:scale-105">
                                 {<social.icon className="w-5 h-5" />}
                             </a>
                         ))}
@@ -139,15 +131,15 @@ export const Hero = () => {
                             from-primary/30 via-transparent 
                             to-primary/10 blur-2xl animate-pulse" 
                         />
-                        <div className="relative glass rounded-3xl p-2 glow-border">
+                        <div className="relative surface p-2">
                             <img 
                                 src={isDarkMode ? "/assets/profile-image-dark.avif" : "/assets/profile-image-light.avif"}
                                 alt="RG Mazon" 
-                                className="w-full aspect-[4/5] object-cover rounded-2xl" 
+                                className="w-full aspect-[4/5] object-cover rounded-[1.25rem]" 
                             />
 
                             {/* Floating Badge */}
-                            <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float">
+                            <div data-tone="dark" className="absolute -bottom-4 -right-4 glass-clear rounded-xl px-4 py-3 animate-float">
                                 <div className="flex items-center gap-3">
                                     <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
                                     <span className="text-sm font-medium">Available for work.</span>
@@ -155,9 +147,9 @@ export const Hero = () => {
                             </div>
 
                             {/* Stats Badge */}
-                            <div className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 animate-float animation-delay-500">
-                                <div className="text-2xl font-bold text-primary">3+</div>
-                                <div className="text-xs text-muted-foreground">Years Exp.</div>
+                            <div data-tone="dark" className="absolute -top-4 -left-4 glass-clear rounded-xl px-4 py-3 animate-float animation-delay-500">
+                                <div className="text-2xl font-bold text-[#aab3ff]">3+</div>
+                                <div className="text-xs opacity-80">Years Exp.</div>
                             </div>
 
 
@@ -175,7 +167,7 @@ export const Hero = () => {
                 <div className="relative overflow-hidden">
                     <div className="flex animate-marquee">
                         {[...skills, ...skills].map((skill, idx) => (
-                            <div key={`skill-${idx}`} className="flex-shrink-0 px-8 py-4">
+                            <div key={`skill-${idx}`} aria-hidden={idx >= skills.length || undefined} className="flex-shrink-0 px-8 py-4">
                                 <span className="text-xl font-semibold text-muted-foreground/50 hover:text-muted-foreground transition-colors">{skill}</span>
                             </div>
                         ))}
@@ -186,7 +178,7 @@ export const Hero = () => {
                 <div className="relative overflow-hidden mb-10">
                     <div className="flex animate-marquee-reverse">
                         {[...skillIcons, ...skillIcons, ...skillIcons].map((skill, idx) => (
-                            <div key={`skill-icon-${idx}`} className="flex-shrink-0 px-6 py-4">
+                            <div key={`skill-icon-${idx}`} aria-hidden={idx >= skillIcons.length || undefined} className="flex-shrink-0 px-6 py-4">
                                 <img 
                                     src={skill.icon} 
                                     alt={skill.name} 
@@ -202,7 +194,7 @@ export const Hero = () => {
 
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 
+        <div className="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2
                 animate-fade-in animation-delay-800" >
             <a 
                 href="#about"

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ArrowUpRight, Github } from "lucide-react";
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
 import ProjectModal from "../components/ProjectModal";
-import { BackgroundDots } from "../components/BackgroundDots";
+import { withViewTransition, HERO_NAME } from "../lib/viewTransition";
 
 
 const projects = [
@@ -215,18 +215,28 @@ const projects = [
 export const Projects = () => {
     const [selectedProject, setSelectedProject] = useState(null);
 
-    const openProject = (p) => setSelectedProject(p);
-    const closeProject = () => setSelectedProject(null);
+    // The card image morphs into the modal gallery (and back) where view transitions are supported.
+    const openProject = (project, img) => {
+        img.style.viewTransitionName = HERO_NAME;
+        withViewTransition(() => {
+            img.style.viewTransitionName = "";
+            setSelectedProject(project);
+        });
+    };
+
+    const closeProject = () => {
+        if (!selectedProject) return;
+        const img = document.querySelector(`[data-project-image="${CSS.escape(selectedProject.title)}"]`);
+        const transition = withViewTransition(() => {
+            setSelectedProject(null);
+            if (img) img.style.viewTransitionName = HERO_NAME;
+        });
+        const release = () => { if (img) img.style.viewTransitionName = ""; };
+        if (transition) transition.finished.finally(release); else release();
+    };
 
     return (
         <section className="py-32 relative overflow-hidden" id="projects">
-
-            {/* Green Dots */}
-            <BackgroundDots />
-
-            {/* Bg glows */}
-            <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/5 rounded-full blur-3xl" />
 
 
 
@@ -240,7 +250,7 @@ export const Projects = () => {
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-secondary-foreground">
                         Projects built to
-                        <span className="font-serif italic font-normal text-white">
+                        <span className="font-serif italic font-normal text-foreground">
                             {" "}
                             solve real problems.
                         </span>
@@ -253,33 +263,32 @@ export const Projects = () => {
                 {/* Projects Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.map((project, idx) => (
-                        <div
+                        <article
                             key={project.title}
-                            role="button"
-                            tabIndex={0}
-                            onClick={() => openProject(project)}
-                            onKeyDown={(e) => { if (e.key === 'Enter') openProject(project); }}
-                            className="group glass rounded-2xl overflow-hidden animate-fade-in md:row-span-1 cursor-pointer"
+                            className="group relative surface overflow-hidden animate-fade-in md:row-span-1 cursor-pointer has-[button:focus-visible]:outline-2 has-[button:focus-visible]:outline-primary has-[button:focus-visible]:outline-offset-2"
                             style={{ animationDelay: `${(idx + 1) * 100}ms` }}
                         >
                             {/* Image */}
                             <div className="relative overflow-hidden aspect-video">
                                 <img 
                                     src={project.image} 
-                                    alt={project.title} 
+                                    alt={project.title}
+                                    data-project-image={project.title}
                                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
-                                {/* Overlay Links */}
-                                <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                {/* Overlay links: clear glass over the image. They sit above the card's stretched button
+                                    (z-10) and stay visible for keyboard users via focus-within. */}
+                                <div className="absolute inset-0 z-10 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none">
                                     {project.link && project.link !== "#" && (
                                         <a
                                             href={project.link}
                                             target="_blank"
                                             rel="noreferrer"
-                                            onClick={(e) => e.stopPropagation()}
-                                            className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
+                                            aria-label={`Visit ${project.title} (opens in a new tab)`}
+                                            data-tone="dark"
+                                            className="pointer-events-auto size-11 grid place-items-center rounded-full glass-clear hover:bg-primary hover:text-primary-foreground transition"
                                         >
-                                            <ArrowUpRight className="w-5 h-5" />
+                                            <ArrowUpRight className="w-5 h-5" aria-hidden="true" />
                                         </a>
                                     )}
                                     {project.github && project.github !== "#" && (
@@ -287,10 +296,11 @@ export const Projects = () => {
                                             href={project.github}
                                             target="_blank"
                                             rel="noreferrer"
-                                            onClick={(e) => e.stopPropagation()}
-                                            className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
+                                            aria-label={`${project.title} source code (opens in a new tab)`}
+                                            data-tone="dark"
+                                            className="pointer-events-auto size-11 grid place-items-center rounded-full glass-clear hover:bg-primary hover:text-primary-foreground transition"
                                         >
-                                            <Github className="w-5 h-5" />
+                                            <Github className="w-5 h-5" aria-hidden="true" />
                                         </a>
                                     )}
                                 </div>
@@ -299,11 +309,21 @@ export const Projects = () => {
                             {/* Content */}
                             <div className="p-6 space-y-4">
                                 <div className="flex items-start justify-between">
-                                    <h3 className="text-xl font-semibold group:hover:text-primary transition-colors">
-                                        {project.title}
+                                    <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
+                                        {/* The card's one real control. The pseudo-element stretches it over the whole card,
+                                            so clicking anywhere opens the project without nesting buttons and links. */}
+                                        <button
+                                            type="button"
+                                            onClick={(e) => openProject(project, e.currentTarget.closest("article").querySelector("img"))}
+                                            aria-haspopup="dialog"
+                                            className="text-left cursor-pointer focus-visible:outline-none after:absolute after:inset-0 after:content-['']"
+                                        >
+                                            {project.title}
+                                        </button>
                                     </h3>
-                                    <ArrowUpRight 
-                                        className="w-5 h-5 
+                                    <ArrowUpRight
+                                        aria-hidden="true"
+                                        className="w-5 h-5
                                         text-muted-foreground group-hover:text-primary 
                                         group-hover:translate-x-1 
                                         group-hover:translate-y-1 
@@ -316,16 +336,14 @@ export const Projects = () => {
                                 <div className="flex flex-wrap gap-2">
                                     {project.tags.map((tag, tagIdx) => (
                                         <span 
-                                            className="px-4 py-1.5 rounded-full bg-surface text-xs 
-                                                    font-medium border border-border/50 text-muted-foreground 
-                                                    hover:border-primary/50 hover:text-primary transition-all 
-                                                    duration-300 hover:cursor-pointer" 
+                                            className="px-4 py-1.5 rounded-full bg-surface text-xs
+                                                    font-medium border border-border/50 text-muted-foreground"
                                             key={`${project.title}-${tag}-${tagIdx}`}>{tag}
                                         </span>
                                     ))}
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     ))}
                 </div>
 

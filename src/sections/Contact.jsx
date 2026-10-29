@@ -2,7 +2,6 @@ import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-reac
 import { Button } from "../components/Button";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { BackgroundDots } from "../components/BackgroundDots";
 
 const contactInfo = [
   {
@@ -15,7 +14,7 @@ const contactInfo = [
     icon: Phone,
     label: "Phone",
     value: "+639 524 754587",
-    href: ":+639524754587",
+    href: "tel:+639524754587",
   },
   {
     icon: MapPin,
@@ -77,13 +76,6 @@ export const Contact = () => {
     return (
         <section className="py-32 relative overflow-hidden" id="contact">
 
-            {/* Green Dots */}
-            <BackgroundDots />
-
-            {/* Bg glows */}
-            <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/5 rounded-full blur-3xl" />
-
 
             <div className="container mx-auto px-6 relative z-10">
 
@@ -94,7 +86,7 @@ export const Contact = () => {
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-secondary-foreground">
                         Let's build{" "}
-                        <span className="font-serif italic font-normal text-white">
+                        <span className="font-serif italic font-normal text-foreground">
                         something great!
                         </span>
                     </h2>
@@ -104,7 +96,7 @@ export const Contact = () => {
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-                    <div className="glass p-8 rounded-3xl border border-primary/30 animate-fade-in animation-delay-300">
+                    <div className="surface p-8 animate-fade-in animation-delay-300">
                         <h3 className="text-xl font-semibold mb-2">Send a message</h3>
                         <p className="text-sm text-muted-foreground mb-6">
                             Share your project goals and I’ll get back to you with next steps.
@@ -121,8 +113,8 @@ export const Contact = () => {
                                     onChange={(e) =>
                                         setFormData({ ...formData, name: e.target.value })
                                     }
-                                    className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:primary outline-none transition-all" 
-                                />   
+                                    className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                                />
                             </div>
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium mb-2">Email address</label>
@@ -135,8 +127,8 @@ export const Contact = () => {
                                     onChange={(e) =>
                                         setFormData({ ...formData, email: e.target.value })
                                     }
-                                    className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:primary outline-none transition-all" 
-                                />   
+                                    className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                                />
                             </div>
                             <div>
                                 <label htmlFor="message" className="block text-sm font-medium mb-2">Project details</label>
@@ -149,7 +141,7 @@ export const Contact = () => {
                                     onChange={(e) =>
                                         setFormData({ ...formData, message: e.target.value })
                                     }
-                                    className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:primary outline-none transition-all resize-none" 
+                                    className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none" 
                                 />   
                             </div>
                             <Button 
@@ -191,7 +183,7 @@ export const Contact = () => {
 
                         {/* Contact Info */}
                         <div className="space-y-6 animate-fade-in animation-delay-400">
-                            <div className="glass rounded-3xl p-8 border border-primary/30">
+                            <div className="surface p-8">
                                 <h3 className="text-xl font-semibold mb-6">
                                     Contact Information
                                 </h3>
@@ -222,7 +214,7 @@ export const Contact = () => {
                             </div>
 
                             {/* Availability Card */}
-                            <div className="glass rounded-3xl p-8 border border-primary/30">
+                            <div className="surface p-8">
                             <div className="flex items-center gap-3 mb-4">
                                 <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
                                 <span className="font-medium">Currently Available</span>
