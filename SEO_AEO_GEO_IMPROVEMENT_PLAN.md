@@ -1,100 +1,98 @@
 # SEO, AEO, and GEO Improvement Plan
 
-## Goal
+Based on an audit against `portfolio-seo-aeo-geo-skill.md` (2026-07-29). Scope excludes `rgmazon-v3/`.
 
-Improve the portfolio’s visibility in search engines, answer engines, and AI-generated recommendations without changing the core design or structure unnecessarily.
+## Audit summary
 
-## 1. SEO Improvements
+The site already does metadata, JSON-LD, and FAQ content well. The dominant problem is structural: this is a pure client-side-rendered Vite/React SPA with no SSR/SSG/prerendering. Fetching the page without JS execution returns:
 
-### 1.1 Metadata and positioning
+```html
+<body><div id="root"></div></body>
+```
 
-- Refine the homepage title and meta description to better target high-intent keywords such as:
-  - React developer
-  - Laravel developer
-  - PHP web developer
-  - full-stack developer
-  - web developer in the Philippines
-- Make the homepage copy more explicit about:
-  - what services are offered
-  - who the work is for
-  - what technologies are used
-  - the outcomes delivered
+Every section — Hero, About, Projects, Experience, FAQ — only exists after the JS bundle hydrates. Googlebot mostly copes via its render queue, but GPTBot, ClaudeBot, PerplexityBot, and CCBot are documented as unreliable at executing JS. Right now they see an empty page, which means the good copy, FAQ answers, and JSON-LD facts are effectively invisible for GEO citation purposes. Fixing this is the highest-leverage item below — everything else is secondary until it's addressed.
 
-### 1.2 On-page content clarity
+---
 
-- Strengthen the hero and about sections with clearer service-oriented language.
-- Add a short “Services” or “What I do” section to make the page easier for search engines to understand.
-- Ensure headings and body copy use relevant keywords naturally rather than stuffing them.
+## P0 — Fix crawlable content (do this first)
 
-### 1.3 Technical SEO
+### 0.1 Prerender the site to static HTML
+The page is a single route (hash-anchored sections, no router), so a full framework migration isn't required — a build-time prerender is enough to get real content into the initial HTML response.
 
-- Expand the sitemap as new pages are added.
-- Continue maintaining canonical URLs, clean metadata, and crawl-friendly structure.
-- Consider adding a dedicated page for services, projects, or case studies later for stronger topical depth.
+- Add a prerender step to the build (e.g. `vite-plugin-prerender`, or a small Puppeteer/Playwright script that renders the built `dist/index.html` in a headless browser after `vite build` and overwrites `dist/index.html` with the fully rendered DOM).
+- Verify success with `curl https://rgmazon.pages.dev/ | grep "Rudolfh Mazon"` (or similar) — the raw HTML should contain real prose, not just `<div id="root">`.
+- Client-side hydration still runs on top for interactivity (theme toggle, project modal, contact form) — this is a rendering-output fix, not a rewrite.
+- If a Puppeteer-based approach adds too much build complexity, the fallback is migrating to a lightweight SSG (Astro islands, or Next.js static export) — bigger lift, but worth keeping on the table if the prerender script becomes brittle.
 
-## 2. AEO Improvements
+---
 
-### 2.1 Direct-answer content
+## P1 — Quick wins (low effort, real impact)
 
-- Add a FAQ section that answers common questions such as:
-  - What services do you offer?
-  - What technologies do you use?
-  - Do you build websites, web apps, or both?
-  - Can you work on React and Laravel projects?
-- Write answers in plain, concise language that matches how people ask questions online.
+### 1.1 Expand AI crawler access in `robots.txt`
+Currently only `GPTBot` and `Google-Extended` are explicitly allowed. Add the rest of the major AI crawlers so nothing is silently excluded:
+```
+User-agent: ChatGPT-User
+Allow: /
 
-### 2.2 Structured content for answer engines
+User-agent: PerplexityBot
+Allow: /
 
-- Add a short “How I work” or “What I build” section with clear, scannable bullets.
-- Make the page more answer-ready by turning key information into direct statements rather than only narrative copy.
+User-agent: ClaudeBot
+Allow: /
 
-### 2.3 Structured data
+User-agent: CCBot
+Allow: /
+```
 
-- Add FAQPage schema for the FAQ section.
-- Add Service schema if a services section is introduced.
-- Keep JSON-LD concise, accurate, and relevant to the content shown on the page.
+### 1.2 Publish `llms.txt`
+Add `public/llms.txt` with a short curated summary (name, role, stack, availability) and links to the homepage's key sections. Low cost, forward-looking bet per skill §5.2.
 
-## 3. GEO Improvements
+### 1.3 Fix sitemap entries
+Drop the `#about`, `#projects`, `#faq`, `#contact` hash-fragment URLs from `sitemap.xml` — they aren't independently crawlable pages and add sitemap noise. Keep just the homepage entry unless/until real subpages exist.
 
-### 3.1 Make expertise easier for AI systems to understand
+### 1.4 Fix favicon MIME type
+`index.html` declares `type="image/svg+xml"` for `favicon.ico`, which is actually an `.ico` file. Correct the `<link rel="icon">` type (or ship an actual `.svg` favicon to match the tag).
 
-- Add a short expertise summary that clearly states:
-  - your core stack
-  - your focus areas
-  - the type of projects you build
-  - the outcomes you help create
-- Use plain language that is easy for both users and AI systems to interpret.
+### 1.5 Self-host third-party images
+Devicon skill icons (jsdelivr) and testimonial avatars (Unsplash) are hotlinked. Download and serve from `/public/assets` to remove the extra DNS/TLS hops and avoid breakage if the CDN changes URLs — minor CWV win, mostly a reliability fix.
 
-### 3.2 Improve project storytelling
+---
 
-- Rework project descriptions to emphasize:
-  - the problem
-  - the solution
-  - the result
-  - the technologies used
-- This makes the work more useful for both search engines and AI-generated summaries.
+## P2 — Content depth (feeds SEO + AEO + GEO simultaneously)
 
-### 3.3 Build trust and authority signals
+### 2.1 Turn project entries into real case studies
+Current project cards/modal repeat the same one-paragraph marketing blurb. Per skill §2.4, restructure each project (in `Projects.jsx` / `ProjectModal.jsx`) around:
+- **Problem** — what need this solved
+- **Approach** — architecture/stack decisions and why
+- **Challenge** — one specific technical obstacle and the fix (most citable part for GEO)
+- **Result** — a concrete outcome if available (users, performance numbers, scale)
 
-- Add evidence of real-world impact where possible, such as:
-  - client or project outcomes
-  - measurable results
-  - testimonials
-  - case-study style summaries
-- The more concrete and specific the content, the more likely AI systems are to surface it confidently.
+This is the single most reusable win — it strengthens indexable long-form content, gives AEO a natural Q&A shape, and gives GEO tools a specific, quotable technical detail to cite.
 
-## 4. Recommended Implementation Order
+### 2.2 Add `SoftwareSourceCode` schema per project
+Once case-study content exists, add a JSON-LD block per project (can live in `ProjectModal.jsx` or be injected when a project is opened) following skill §3.3, linking `codeRepository` to the GitHub links already present.
 
-1. Update homepage metadata and title/description.
-2. Add a services or what-I-do section.
-3. Add a FAQ section with concise answers.
-4. Add structured data for FAQ and services.
-5. Refine project descriptions to be more outcome-driven.
-6. Add a dedicated case-study or project detail page if needed later.
+### 2.3 Add a visible "last updated" signal
+There's currently only a hidden comment (`// last updated: January 2026`) in `Footer.jsx`. Make this a visible, dynamic date in the footer or About section — skill §5.5 flags this as a freshness signal AI systems weight for fast-moving tech stacks.
 
-## 5. Success Indicators
+### 2.4 Consider a lightweight blog/writing section (optional, longer-term)
+Not urgent for a single-freelancer portfolio, but it's the main lever the skill calls out for long-tail AEO queries ("how to X in React with Y"). Worth revisiting once the P0/P1 items are shipped and if there's bandwidth for 1–2 posts/month.
 
-- Higher relevance for target keywords in search results.
-- Better visibility in answer-style results.
-- Improved clarity and memorability for AI systems and assistants.
-- Stronger conversion from visitors who are looking for a developer or technical partner.
+---
+
+## Recommended order
+
+1. Ship the prerender fix (P0.1) — validate with a raw `curl` fetch before moving on.
+2. Robots.txt + llms.txt + sitemap + favicon fixes (P1.1–1.4) — all small, independent, same PR is fine.
+3. Self-host hotlinked images (P1.5).
+4. Rewrite project descriptions into case-study format (P2.1), then add per-project schema (P2.2).
+5. Visible last-updated date (P2.3).
+6. Blog section — revisit later, not blocking.
+
+## Validation checklist after implementation
+
+- [ ] `curl` the live homepage with no JS execution and confirm real text content is present in the HTML
+- [ ] Google Rich Results Test passes for `Person`, `WebSite`, `Service`, `FAQPage`, and new `SoftwareSourceCode` blocks
+- [ ] `robots.txt` allows all listed crawlers; `llms.txt` resolves at root
+- [ ] Lighthouse SEO/Performance/Accessibility still 90+ after prerender step is added
+- [ ] Manually prompt ChatGPT/Perplexity/Claude with "who is Rudolfh Mazon, the developer?" a few weeks after deploy to check citation behavior
